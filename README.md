@@ -33,5 +33,5 @@ After cloning the repository, start a terminal in it's direcotry and execute:
 docker-compose up
 ```
 
-## Getting started
+## License
 MIT

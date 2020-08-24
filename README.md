@@ -2,7 +2,7 @@
 This repo automates the start of the SyMP framework within Docker
 
 ## Getting started
-Currently the services tha are being started are:
+The following services are started:
 - Camunda BPM 
 - MySQL DB
 - FTP Server - vsftpd

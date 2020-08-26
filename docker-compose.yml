@@ -3,7 +3,7 @@ services:
     vsftpd:
         image: fauria/vsftpd
         volumes:
-            - './ftp_dir:/home/vsftpd'
+            - 'ontologies:/home/vsftpd/admin'
         ports:
             - '20:20'
             - '21:21'
@@ -23,11 +23,12 @@ services:
         restart: always
         ports:
             - '8080:8080'
-        #volumes:
+        volumes:
             # Mounting the whole folder will create a clean distro without webapps and examples
             # Thats why custom apps must be added separately
             #Example: 
             #- './camunda_webapps/*your_custom_app.war*:/camunda/webapps/*your_custom_app.war*'
+            - './camunda_webapps/reasoningbpm-1.0.0.war:/camunda/webapps/reasoningbpm-1.0.0.war'
             
     mysql:
         image: mysql   
@@ -48,5 +49,8 @@ networks:
       driver: default
       config:
         - subnet: 172.22.0.0/16  
+        
+volumes:
+  ontologies:
            
      

@@ -13,9 +13,10 @@ The following services are started:
 ### Configuration
 - FTP Server
     - Runs on port 21
-    - Accepts anonymous connection 
-    - Currently allows read-only access (The image is explicitly configured for anonymouse read-only acces. Changening configurations in the vsftpd.conf leads to a failing server at startup.)
-    - The "ftp_dir" folder is mounted to the server, so files can be copied by hand there if they need to be accessed from any of the SyMP framework services
+    - Default credentials - **account**: admin, **password**: admin
+    - Anonymous connections are allowed, but uploading doesn't working
+    - The current configuration of the anonymous user leads to Error 500 and disconnects the user
+    - The FTP server can be configured by editing the Dockerfile and the vsftpd.conf in the ftp directory of the repository 
     
 - Camunda BPM
     - In order to run custom apps, they have to be added under the volume sub-section of the camunda section in the **docker-compose.yml** file. 

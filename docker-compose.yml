@@ -1,14 +1,14 @@
 version: '3.3'
 services:
     ftp:
-        image: metabrainz/docker-anon-ftp
-        volumes:
-            - './ftp_dir:/var/ftp:ro'
+        build: ./ftp
         ports:
-            - '20:20'
-            - '21:21'
-            - '65500-65515:65500-65515'            
+            - 20-21:20-21
+            - 21100-21110:21100-21110
         container_name: ftp
+        environment:
+            FTP_USER: admin
+            FTP_PASS: admin
         restart: always
         networks:
             service1_net:
@@ -38,8 +38,7 @@ services:
         networks:
             service1_net:
                 ipv4_address: 172.22.0.100
-            
-            
+                  
 networks:
   service1_net:
     ipam:

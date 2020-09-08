@@ -15,6 +15,7 @@ The following services are started:
     - Runs on port 21
     - Anonymous connections are enabled 
     - Upload are allowed in the /upload directory 
+    - Connection is SSL encrypted with a self signed certificate
     
 - Camunda BPM
     - In order to run custom apps, they have to be added under the volume sub-section of the camunda section in the **docker-compose.yml** file. 

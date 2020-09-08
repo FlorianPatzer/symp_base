@@ -40,9 +40,10 @@ RUN chmod +x /usr/sbin/run-vsftpd.sh
 RUN mkdir -p /home/vsftpd/
 RUN chown -R ftp:ftp /home/vsftpd/
 
-RUN mkdir -p /var/ftp/
-RUN chown -R ftp:ftp /var/ftp/
-RUN chmod 775 /var/ftp/
+RUN mkdir -p /var/ftp/upload
+RUN chown -R ftp:ftp /var/ftp/upload
+RUN chmod -R 777 /var/ftp/upload
+RUN chmod g+s /var/ftp/upload
 
 VOLUME /home/vsftpd
 VOLUME /var/log/vsftpd

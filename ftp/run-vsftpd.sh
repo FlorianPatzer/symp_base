@@ -21,6 +21,12 @@ fi
 mkdir -p "/home/vsftpd/${FTP_USER}"
 chown -R ftp:ftp /home/vsftpd/
 
+# Allow default read/write access to the anonymouse user
+setfacl -R -d -m g::rwx -m o::rwx /var/ftp/upload
+
+# Delete the default pub directory
+rm -R /var/ftp/pub
+
 echo -e "${FTP_USER}\n${FTP_PASS}" > /etc/vsftpd/virtual_users.txt
 /usr/bin/db_load -T -t hash -f /etc/vsftpd/virtual_users.txt /etc/vsftpd/virtual_users.db
 
@@ -45,18 +51,10 @@ export LOG_FILE=`grep xferlog_file /etc/vsftpd/vsftpd.conf|cut -d= -f2`
 # stdout server info:
 if [ ! $LOG_STDOUT ]; then
 cat << EOB
-	*************************************************
-	*                                               *
-	*    Custom VSFTPD Server taken from:           *
-	*    https://github.com/fauria/docker-vsftpd    *
-	*                                               *
-	*************************************************
-
-	SERVER SETTINGS
-	---------------
-	· FTP User: $FTP_USER
-	· FTP Password: $FTP_PASS
-	. Anonymous User: Enabled
+	============================================================
+	|                  Anonymous VSFTPD Server                 |
+	|     Uploads are allowed only in the /upload directory    |
+	============================================================
 EOB
 else
     /usr/bin/ln -sf /dev/stdout $LOG_FILE

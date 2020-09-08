@@ -11,12 +11,10 @@ The following services are started:
 - Docker-compose
 
 ### Configuration
-- FTP Server
+- VSFTP Server
     - Runs on port 21
-    - Default credentials - **account**: admin, **password**: admin
-    - Anonymous connections are allowed, but uploading doesn't working
-    - The current configuration of the anonymous user leads to Error 500 and disconnects the user
-    - The FTP server can be configured by editing the Dockerfile and the vsftpd.conf in the ftp directory of the repository 
+    - Anonymous connections are enabled 
+    - Upload are allowed in the /upload directory 
     
 - Camunda BPM
     - In order to run custom apps, they have to be added under the volume sub-section of the camunda section in the **docker-compose.yml** file. 

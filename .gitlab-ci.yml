@@ -7,9 +7,6 @@ variables:
 services:
   - docker:18.09-dind
 
-stage:
-  - build
-  
 default:
   tags:
     - ILT
@@ -27,11 +24,6 @@ ftp-branch:
     DOCKER_IMAGE_SUBPROJECT: /ftp
   extends:
     - .docker-build-branch
-
-say_hello:
-  stage: build
-  script:
-    - echo "Hello world (from sript)"
 
 docker_hello_world:
  script:

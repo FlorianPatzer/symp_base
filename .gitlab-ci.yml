@@ -26,10 +26,7 @@ ftp-branch:
     - .docker-build-branch
 
 docker_hello_world:
- image: hello-world
  services:
    - docker:dind
- before_script:
-    - docker login -u "#CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
  script:
-  - docker pull
+   - docker pull hello-worold

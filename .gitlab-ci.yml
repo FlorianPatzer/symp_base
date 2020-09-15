@@ -1,0 +1,26 @@
+include:
+  - remote: https://ci-templates.k8s.ilt-dmz.iosb.fraunhofer.de/templates/gitlab-ci-common.yml
+
+variables:
+  DOCKER_HOST: tcp://localhost:2375
+
+services:
+  - docker:18.09-dind
+
+default:
+  tags:
+    - ILT
+
+ftp-master:
+  variables:
+    DOCKER_FILE_PATH: ./ftp/
+    DOCKER_IMAGE_SUBPROJECT: /ftp
+  extends:
+    - .docker-build-master
+
+ftp-branch:
+  variables:
+    DOCKER_FILE_PATH: ./ftp/
+    DOCKER_IMAGE_SUBPROJECT: /ftp
+  extends:
+    - .docker-build-branch

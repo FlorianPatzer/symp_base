@@ -27,10 +27,10 @@ ftp-branch:
   extends:
     - .docker-build-branch
 
-docker_hello_world:
- services:
-   - docker:dind
- before_script:
-   - docker login -u "#CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
- script:
-   - docker pull hello-worold
+#docker_hello_world:
+# services:
+#   - docker:dind
+# before_script:
+#   - docker login -u "#CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+# script:
+#   - docker pull hello-worold

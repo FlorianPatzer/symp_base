@@ -28,6 +28,6 @@ ftp-branch:
 docker_hello_world:
  image: hello-world
  services:
-   -docker:dind
+   - docker:dind
  script:
   - docker run hello-world

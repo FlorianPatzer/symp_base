@@ -33,6 +33,6 @@ say_hello:
   script:
     - echo "Hello world (from sript)"
 
-docker_hello:
-  stage: build
-  image: hello-world
+docker_hello_world:
+ script:
+  - docker run  hello-world

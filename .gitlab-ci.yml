@@ -6,7 +6,8 @@ variables:
 
 services:
   - docker:18.09-dind
-
+  - mysql
+  
 default:
   tags:
     - ILT
@@ -24,7 +25,3 @@ ftp-branch:
     DOCKER_IMAGE_SUBPROJECT: /ftp
   extends:
     - .docker-build-branch
-
-
-mysql:
-  image: mysql

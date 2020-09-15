@@ -4,6 +4,8 @@ include:
 variables:
   DOCKER_HOST: tcp://localhost:2375
 
+image: docker
+
 services:
   - docker:18.09-dind
 

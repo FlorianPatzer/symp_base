@@ -6,6 +6,9 @@ variables:
 
 services:
   - docker:18.09-dind
+
+stage:
+  - build
   
 default:
   tags:
@@ -26,4 +29,10 @@ ftp-branch:
     - .docker-build-branch
 
 say_hello:
+  stage: build
+  script:
+    - echo "Hello world (from sript)"
+
+docker_hello:
+  stage: build
   image: hello-world

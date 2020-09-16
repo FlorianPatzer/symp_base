@@ -34,3 +34,9 @@ mysql-master:
   extends:
     - .docker-build-master
 
+mysql-branch:
+  variables:
+    DOCKER_FILE_PATH: ./mysql/
+    DOCKER_IMAGE_SUBPROJECT: /mysql
+  extends:
+    - .docker-build-branch

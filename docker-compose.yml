@@ -14,7 +14,7 @@ services:
             service1_net:
         
     camunda-bpm-platform:
-        image: 'camunda/camunda-bpm-platform:latest'
+        build: ./camunda
         container_name: camunda
         restart: always
         ports:

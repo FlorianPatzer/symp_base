@@ -13,6 +13,33 @@ default:
   tags:
     - ILT
 
+ftp-master:
+  variables:
+    DOCKER_FILE_PATH: ./ftp/
+    DOCKER_IMAGE_SUBPROJECT: /ftp
+  extends:
+    - .docker-build-master
+
+ftp-branch:
+  variables:
+    DOCKER_FILE_PATH: ./ftp/
+    DOCKER_IMAGE_SUBPROJECT: /ftp
+  extends:
+    - .docker-build-branch
+
+mysql-master:
+  variables:
+    DOCKER_FILE_PATH: ./mysql/
+    DOCKER_IMAGE_SUBPROJECT: /mysql
+  extends:
+    - .docker-build-master
+
+mysql-branch:
+  variables:
+    DOCKER_FILE_PATH: ./mysql/
+    DOCKER_IMAGE_SUBPROJECT: /mysql
+  extends:
+    - .docker-build-branch
 
 camunda-master:
   variables:

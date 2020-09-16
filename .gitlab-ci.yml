@@ -41,7 +41,7 @@ mysql-branch:
   extends:
     - .docker-build-branch
 
-test:
+camunda:
   image: camunda/camunda-bpm-platform
   script:
-    - echo "Camunda test"
+    - docker build -t camunda/camunda-bpm-platform

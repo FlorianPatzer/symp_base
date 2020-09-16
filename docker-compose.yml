@@ -12,7 +12,6 @@ services:
         restart: always
         networks:
             service1_net:
-                ipv4_address: 172.22.0.101
         
     camunda-bpm-platform:
         image: 'camunda/camunda-bpm-platform:latest'
@@ -28,22 +27,17 @@ services:
             - './camunda_webapps/reasoningbpm-1.0.0.war:/camunda/webapps/reasoningbpm-1.0.0.war'
             
     mysql:
-        image: mysql   
+        build: ./mysql   
         command: --default-authentication-plugin=mysql_native_password
+        container_name: mysql
         environment:
             MYSQL_ROOT_PASSWORD: 0b53c4f
             MYSQL_DATABASE: security_analysis_repository
-        volumes:
-            - './mysql_config:/etc/mysql/conf.d'
+        ports:
+            - '3306:3306'
         networks:
             service1_net:
-                ipv4_address: 172.22.0.100
                   
 networks:
   service1_net:
-    ipam:
-      driver: default
-      config:
-        - subnet: 172.22.0.0/16  
-           
      

@@ -27,10 +27,10 @@ ftp-branch:
   extends:
     - .docker-build-branch
 
-#docker_hello_world:
-# services:
-#   - docker:dind
-# before_script:
-#   - docker login -u "#CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
-# script:
-#   - docker pull hello-worold
+mysql-master:
+  variables:
+    DOCKER_FILE_PATH: ./mysql/
+    DOCKER_IMAGE_SUBPROJECT: /mysql
+  extends:
+    - .docker-build-master
+

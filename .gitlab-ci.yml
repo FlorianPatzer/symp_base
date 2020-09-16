@@ -13,35 +13,19 @@ default:
   tags:
     - ILT
 
-ftp-master:
+
+camunda-master:
   variables:
-    DOCKER_FILE_PATH: ./ftp/
-    DOCKER_IMAGE_SUBPROJECT: /ftp
+    DOCKER_FILE_PATH: ./camunda/
+    DOCKER_IMAGE_SUBPROJECT: /camunda
   extends:
     - .docker-build-master
 
-ftp-branch:
+camunda-branch:
   variables:
-    DOCKER_FILE_PATH: ./ftp/
-    DOCKER_IMAGE_SUBPROJECT: /ftp
+    DOCKER_FILE_PATH: ./camunda/
+    DOCKER_IMAGE_SUBPROJECT: /camunda
   extends:
     - .docker-build-branch
 
-mysql-master:
-  variables:
-    DOCKER_FILE_PATH: ./mysql/
-    DOCKER_IMAGE_SUBPROJECT: /mysql
-  extends:
-    - .docker-build-master
-
-mysql-branch:
-  variables:
-    DOCKER_FILE_PATH: ./mysql/
-    DOCKER_IMAGE_SUBPROJECT: /mysql
-  extends:
-    - .docker-build-branch
-
-camunda:
-  image: camunda/camunda-bpm-platform
-  script:
-    - docker build -t camunda/camunda-bpm-platform
+  

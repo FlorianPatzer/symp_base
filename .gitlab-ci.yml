@@ -43,9 +43,11 @@ mysql-branch:
     - .docker-build-branch
 
 camunda-master:
-  #image: maven:3-jdk-8
-  #before_script: 
-  #  - mvn dependency:get -Dartifact=commons-collections:commons-collections:3.2.1
+  image: maven:3-jdk-8
+  script: 
+    - mvn --version
+    - mvn dependency:get -Dartifact=commons-collections:commons-collections:3.2.1
+    - mvn dependency:get -Dartifact=commons-lang:commons-lang:2.6
   variables:
     DOCKER_FILE_PATH: ./camunda/
     DOCKER_IMAGE_SUBPROJECT: /camunda
@@ -53,21 +55,23 @@ camunda-master:
     - .docker-build-master
 
 camunda-branch:
-  #image: maven:3-jdk-8
-  #before_script: 
-  #  - mvn dependency:get -Dartifact=commons-collections:commons-collections:3.2.1
+  image: maven:3-jdk-8
+  script: 
+    - mvn --version
+    - mvn dependency:get -Dartifact=commons-collections:commons-collections:3.2.1
+    - mvn dependency:get -Dartifact=commons-lang:commons-lang:2.6
   variables:
     DOCKER_FILE_PATH: ./camunda/
     DOCKER_IMAGE_SUBPROJECT: /camunda
   extends:
     - .docker-build-branch
 
-maven_standalone_test:
-  stage: test
-  image: maven:3-jdk-8
-  script: 
-    - mvn --version
-    - mvn dependency:get -Dartifact=commons-collections:commons-collections:3.2.1
-    - mvn dependency:get -Dartifact=commons-lang:commons-lang:2.6
+#maven_standalone_test:
+#  stage: test
+#  image: maven:3-jdk-8
+#  script: 
+#    - mvn --version
+#    - mvn dependency:get -Dartifact=commons-collections:commons-collections:3.2.1
+#    - mvn dependency:get -Dartifact=commons-lang:commons-lang:2.6
 
   

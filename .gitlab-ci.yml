@@ -68,5 +68,6 @@ maven_standalone_test:
   script: 
     - mvn --version
     - mvn dependency:get -Dartifact=commons-collections:commons-collections:3.2.1
+    - mvn dependency:get -Dartifact=commons-lang:commons-lang:2.6
 
   

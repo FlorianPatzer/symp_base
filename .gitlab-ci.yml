@@ -55,13 +55,4 @@ camunda-branch:
   extends:
     - .docker-build-branch
 
-maven_standalone_test:
-  stage: test
-  image: maven:3-jdk-8
-  script: 
-    - mvn --version
-    - mvn dependency:get -Dartifact=commons-lang:commons-lang:2.6
-    - mvn dependency:get -Dartifact=commons-collections:commons-collections:3.2.1
-     
-
   

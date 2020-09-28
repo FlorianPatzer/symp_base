@@ -56,11 +56,10 @@ camunda-branch:
   extends:
     - .docker-build-branch
 
-camunda-hub-pull:
+camunda:
+  stage: test 
   script: 
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
-    - docker pull camunda/camunda-bpm-platform
-    - docker run camunda/camunda-bpm-platform
+    - docker docker build -f camunda/Dockerfile
 
 camunda-standalone:
   stage: test 

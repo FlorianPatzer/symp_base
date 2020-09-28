@@ -43,21 +43,23 @@ mysql-branch:
     - .docker-build-branch
 
 camunda-master:
+  image: maven:latest
   before_script:
-    - mvn -version
-  variables:
-    DOCKER_FILE_PATH: ./camunda/
-    DOCKER_IMAGE_SUBPROJECT: /camunda
-  extends:
-    - .docker-build-master
+    - mvn install camunda-standalone
+  #variables:
+  #  DOCKER_FILE_PATH: ./camunda/
+  #  DOCKER_IMAGE_SUBPROJECT: /camunda
+  #extends:
+  #  - .docker-build-master
 
 camunda-branch:
-  before_script:
-    - mvn -version
-  variables:
-    DOCKER_FILE_PATH: ./camunda/
-    DOCKER_IMAGE_SUBPROJECT: /camunda
-  extends:
-    - .docker-build-branch
+  image: maven:latest
+  script:
+    - mvn install camunda-standalone
+  #variables:
+  #  DOCKER_FILE_PATH: ./camunda/
+  #  DOCKER_IMAGE_SUBPROJECT: /camunda
+  #extends:
+  #  - .docker-build-branch
 
   

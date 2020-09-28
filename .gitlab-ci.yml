@@ -60,6 +60,9 @@ camunda-hub-pull:
   script: 
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
     - docker pull camunda/camunda-bpm-platform
+    - docker tag camunda/camunda-bpm-platform camunda
+    - docker push camunda
+
 
 camunda-standalone:
   stage: test 

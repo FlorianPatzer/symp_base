@@ -65,10 +65,10 @@ camunda-standalone:
 ubuntu-container:
   image: ubuntu
   before_script:
-    - apt update
-    - apt install maven
+    - apt update -y
+    - apt install -y maven 
     - mvn -version
-    - apt-get install apt-transport-https \ca-certificates \curl \gnupg-agent \ software-properties-common
+    - apt-get install -y apt-transport-https \ca-certificates \curl \gnupg-agent \ software-properties-common
     - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:

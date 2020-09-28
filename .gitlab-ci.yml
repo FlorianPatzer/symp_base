@@ -58,5 +58,6 @@ camunda-branch:
 
 test:
   stage: test
+  image: maven:3-jdk-8
   script: mvn --version
   

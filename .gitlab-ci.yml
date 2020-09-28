@@ -45,8 +45,7 @@ camunda-master:
   before_script:
     - docker version
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
-    - docker pull maven
-    - mvn dependency:get -Dartifact=commons-collections:commons-collections:3.2.1
+    #- docker pull maven
     - docker build camunda
  # variables:
     #DOCKER_FILE_PATH: ./camunda/
@@ -58,8 +57,7 @@ camunda-branch:
   before_script:
     - docker version
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
-    - docker pull maven
-    - mvn dependency:get -Dartifact=commons-collections:commons-collections:3.2.1
+    #- docker pull maven
     - docker build camunda
   #variables:
     #DOCKER_FILE_PATH: ./camunda/

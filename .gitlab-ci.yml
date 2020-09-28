@@ -42,10 +42,10 @@ mysql-branch:
     - .docker-build-branch
 
 camunda-master:
-  image: maven:3.3.9-jdk-8
   before_script:
     - docker version
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - apt install maven
     - mvn -v
     - docker build camunda
  # variables:
@@ -55,10 +55,10 @@ camunda-master:
     - .docker-build-master
 
 camunda-branch:
-  image: maven:3.3.9-jdk-8
   before_script:
     - docker version
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - apt install maven
     - mvn -v
     - docker build camunda
   #variables:

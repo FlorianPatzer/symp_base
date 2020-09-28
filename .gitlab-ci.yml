@@ -54,9 +54,8 @@ camunda-master:
 
 camunda-branch:
   before_script:
-    - curl -sSL https://get.docker.com/ | sh
+    - docker version
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
-    - ./gradlew dist 
 
   variables:
     DOCKER_FILE_PATH: ./camunda/

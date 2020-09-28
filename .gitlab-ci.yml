@@ -56,11 +56,18 @@ camunda-branch:
   extends:
     - .docker-build-branch
 
-camunda-standalone:
+#camunda-standalone:
+#  stage: test 
+#  image: maven:latest
+#  script:
+#    - mvn install -DskipTests -f camunda-standalone
+
+camunda-manual-build:
   stage: test 
-  image: maven:latest
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
-    - mvn install -DskipTests -f camunda-standalone
+    - docker build ./camunda
   
 ubuntu-container:
   image: ubuntu

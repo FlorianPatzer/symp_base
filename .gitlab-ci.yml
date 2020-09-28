@@ -42,6 +42,7 @@ mysql-branch:
     - .docker-build-branch
 
 camunda-master:
+  image: maven
   variables:
     DOCKER_FILE_PATH: ./camunda/
     DOCKER_IMAGE_SUBPROJECT: /camunda
@@ -49,6 +50,7 @@ camunda-master:
     - .docker-build-master
 
 camunda-branch:
+  image: maven
   variables:
     DOCKER_FILE_PATH: ./camunda/
     DOCKER_IMAGE_SUBPROJECT: /camunda

@@ -42,7 +42,7 @@ mysql-branch:
     - .docker-build-branch
 
 camunda-master:
-  service: 
+  services: 
     - maven
   before_script: 
     - mvn --version
@@ -55,7 +55,7 @@ camunda-master:
     - .docker-build-master
 
 camunda-branch:
-  service: 
+  services: 
     - maven
   before_script: 
     - mvn --version

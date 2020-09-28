@@ -65,6 +65,7 @@ camunda-standalone:
 ubuntu-container:
   image: ubuntu
   before_script:
+    - apt update
     - apt install maven
     - mvn -version
     - apt-get install apt-transport-https \ca-certificates \curl \gnupg-agent \ software-properties-common

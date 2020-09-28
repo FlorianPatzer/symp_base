@@ -8,7 +8,6 @@ image: docker
 
 services:
   - docker:18.09-dind
-  - maven:latest
 
 default:
   tags:
@@ -43,7 +42,8 @@ mysql-branch:
     - .docker-build-branch
 
 camunda-master:
-  #image: maven
+  service: 
+    - maven
   before_script: 
     - mvn --version
   #  - mvn dependency:get -Dartifact=commons-collections:commons-collections:3.2.1
@@ -55,7 +55,8 @@ camunda-master:
     - .docker-build-master
 
 camunda-branch:
-  #image: maven
+  service: 
+    - maven
   before_script: 
     - mvn --version
    # - mvn dependency:get -Dartifact=commons-collections:commons-collections:3.2.1

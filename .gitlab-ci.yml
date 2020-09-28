@@ -43,7 +43,7 @@ mysql-branch:
     - .docker-build-branch
 
 camunda-master:
-  image: maven:3-jdk-8
+  #image: maven:3-jdk-8
   before_script: 
     - mvn dependency:get -Dartifact=commons-collections:commons-collections:3.2.1
   variables:
@@ -53,7 +53,7 @@ camunda-master:
     - .docker-build-master
 
 camunda-branch:
-  image: maven:3-jdk-8
+  #image: maven:3-jdk-8
   before_script: 
     - mvn dependency:get -Dartifact=commons-collections:commons-collections:3.2.1
   variables:

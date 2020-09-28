@@ -56,6 +56,7 @@ camunda-branch:
   before_script:
     - docker version
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - docker pull maven
     - docker build camunda
   #variables:
     #DOCKER_FILE_PATH: ./camunda/

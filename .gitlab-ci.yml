@@ -8,7 +8,7 @@ image: docker
 
 services:
   - docker:18.09-dind
-  #- maven:latest
+  - maven:latest
 
 default:
   tags:

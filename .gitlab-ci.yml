@@ -45,26 +45,24 @@ mysql-branch:
 camunda-master:
   image: maven:3.3.9-jdk-8
   before_script:
-    - docker version
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
-    - mvn -v
-    - docker build camunda
- # variables:
-    #DOCKER_FILE_PATH: ./camunda/
-    #DOCKER_IMAGE_SUBPROJECT: /camunda
+    - mvn --version
+    - mvn dependency:get -Dartifact=commons-collections:commons-collections:3.2.1
+    - mvn dependency:get -Dartifact=commons-lang:commons-lang:2.6
+  variables:
+    DOCKER_FILE_PATH: ./camunda/
+    DOCKER_IMAGE_SUBPROJECT: /camunda
   extends:
     - .docker-build-master
 
 camunda-branch:
   image: maven:3.3.9-jdk-8
   before_script:
-    - docker version
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
-    - mvn -v
-    - docker build camunda
-  #variables:
-    #DOCKER_FILE_PATH: ./camunda/
-    #DOCKER_IMAGE_SUBPROJECT: /camunda
+    - mvn --version
+    - mvn dependency:get -Dartifact=commons-collections:commons-collections:3.2.1
+    - mvn dependency:get -Dartifact=commons-lang:commons-lang:2.6
+  variables:
+    DOCKER_FILE_PATH: ./camunda/
+    DOCKER_IMAGE_SUBPROJECT: /camunda
   extends:
     - .docker-build-branch
 

@@ -37,11 +37,7 @@ services:
             - '3306:3306'
         networks:
             service1_net:
-    
-    test:
-        stage: test
-        script: mvn --version
-                  
+                      
 networks:
   service1_net:
      

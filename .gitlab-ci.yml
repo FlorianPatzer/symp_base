@@ -56,4 +56,7 @@ camunda-branch:
   extends:
     - .docker-build-branch
 
+test:
+  stage: test
+  script: mvn --version
   

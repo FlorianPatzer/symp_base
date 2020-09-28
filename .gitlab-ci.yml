@@ -44,7 +44,7 @@ mysql-branch:
 
 camunda-master:
   image: maven:latest
-  before_script:
+  script:
     - mvn install camunda-standalone
   #variables:
   #  DOCKER_FILE_PATH: ./camunda/

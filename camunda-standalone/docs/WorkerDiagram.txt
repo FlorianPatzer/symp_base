@@ -1,0 +1,71 @@
+@startuml
+
+skinparam class {
+	BackgroundColor White
+	ArrowColor Black
+	BorderColor Black
+}
+
+interface ExternalTaskHandler
+note left: This comes from Camunda
+interface ExternalWorkerBuilderRequired
+interface ExternalWorkerBuilderOptional
+interface ExternalReasoningStrategy
+interface ExternalExecutor
+class ExternalWorkerBuilder
+
+ExternalTaskHandler <|.. ExternalWorker
+ExternalWorkerBuilderRequired <|.. ExternalWorkerBuilder
+ExternalWorkerBuilderOptional <|.. ExternalWorkerBuilder
+ExternalWorker <.. ExternalWorkerBuilder : build()
+ExternalExecutor o-- ExternalWorker
+ExternalReasoningStrategy *-- ExternalReasoningWorker
+ExternalReasoningStrategy *-- ExternalReasoningWorkerBuilder
+
+ExternalWorker <|-- ExternalReasoningWorker
+ExternalWorker <|-- ExternalOntologyWorker
+
+ExternalOntologyWorker <|-- ExternalOntologyUploadWorker
+ExternalOntologyWorker <|-- ExternalOntologyMergeWorker
+
+ExternalReasoningStrategy <|.. JenaStrategy
+ExternalReasoningStrategy <|.. SwrlStrategy
+
+
+ExternalReasoningWorker <.. ExternalReasoningWorkerBuilder : build()
+
+interface ExternalTaskHandler {
+       void execute(externalTask: ExternalTask, externalTaskService: ExternalTaskService)
+}
+
+interface ExternalReasoningStrategy {
+    File exec(input: InputStream, vars: Map<String, String>, output: File);
+}
+
+interface ExternalExecutor {
+    void executeBusinessLogic(externalTask: ExternalTask, externalTaskService: ExternalTaskService)
+}
+
+class ExternalReasoningWorkerBuilder {
+       ... various methods for building ...
+       +ExternalReasoningWorkerBuilder setReasoningStrategy(strategy: ReasoningStrategy)
+}
+
+class ExternalReasoningWorker {
+    -reasoningStrat: ExternalReasoningStrategy
+}
+
+class ExternalWorkerBuilder {
+       ... various utility methods for building ...
+}
+
+class ExternalWorker {
+    +currentExternalTask: ExternalTask
+    -outputDir: File
+    -id: String
+    -topic: String
+    -variables: String[]
+    #ExternalWorker(id: String, outputDir: File, topic: String, variables: String[])
+    {static} void setDefaultDir(dir: File)
+}
+@enduml

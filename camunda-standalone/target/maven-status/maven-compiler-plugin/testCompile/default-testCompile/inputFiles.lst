@@ -1,0 +1,14 @@
+/home/ubuntu/Documents/camunda-platform-java/src/test/java/de/fraunhofer/camunda/webapp/external/ExternalStrategiesTest.java
+/home/ubuntu/Documents/camunda-platform-java/src/test/java/de/fraunhofer/camunda/webapp/utils/LoggingTest.java
+/home/ubuntu/Documents/camunda-platform-java/src/test/java/de/fraunhofer/camunda/webapp/utils/BPMNXmlParserTestJoinable.java
+/home/ubuntu/Documents/camunda-platform-java/src/test/java/de/fraunhofer/camunda/webapp/external/MergeOntologyTest.java
+/home/ubuntu/Documents/camunda-platform-java/src/test/java/de/fraunhofer/camunda/webapp/utils/BPMNXmlParserTest.java
+/home/ubuntu/Documents/camunda-platform-java/src/test/java/de/fraunhofer/camunda/webapp/utils/BPMNXmlParserTestMergeHell.java
+/home/ubuntu/Documents/camunda-platform-java/src/test/java/de/fraunhofer/camunda/webapp/reasoning/OWLTest.java
+/home/ubuntu/Documents/camunda-platform-java/src/test/java/de/fraunhofer/camunda/webapp/external/ExternalOntologyUploadWorkerTest.java
+/home/ubuntu/Documents/camunda-platform-java/src/test/java/de/fraunhofer/camunda/webapp/PropertiesServiceTest.java
+/home/ubuntu/Documents/camunda-platform-java/src/test/java/de/fraunhofer/camunda/webapp/utils/MergeUtilOWLTest.java
+/home/ubuntu/Documents/camunda-platform-java/src/test/java/de/fraunhofer/camunda/webapp/reasoning/SwrlApiTest.java
+/home/ubuntu/Documents/camunda-platform-java/src/test/java/de/fraunhofer/camunda/webapp/rest/RestClientTest.java
+/home/ubuntu/Documents/camunda-platform-java/src/test/java/de/fraunhofer/camunda/webapp/reasoning/JenaRulesTest.java
+/home/ubuntu/Documents/camunda-platform-java/src/test/java/TestingServletTest.java

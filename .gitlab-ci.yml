@@ -42,9 +42,10 @@ mysql-branch:
     - .docker-build-branch
 
 camunda-master:
-  image: maven
-  #  - mvn dependency:get -Dartifact=commons-collections:commons-collections:3.2.1
-  #  - mvn dependency:get -Dartifact=commons-lang:commons-lang:2.6
+  before_script:
+    - curl -sSL https://get.docker.com/ | sh
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - ./gradlew dist 
   variables:
     DOCKER_FILE_PATH: ./camunda/
     DOCKER_IMAGE_SUBPROJECT: /camunda
@@ -52,9 +53,11 @@ camunda-master:
     - .docker-build-master
 
 camunda-branch:
-  image: maven
-   # - mvn dependency:get -Dartifact=commons-collections:commons-collections:3.2.1
-   # - mvn dependency:get -Dartifact=commons-lang:commons-lang:2.6
+  before_script:
+    - curl -sSL https://get.docker.com/ | sh
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - ./gradlew dist 
+
   variables:
     DOCKER_FILE_PATH: ./camunda/
     DOCKER_IMAGE_SUBPROJECT: /camunda

@@ -46,6 +46,8 @@ camunda-master:
     - docker version
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
     - docker pull maven
+    - docker run maven
+    - mvn -v
   variables:
     DOCKER_FILE_PATH: ./camunda/
     DOCKER_IMAGE_SUBPROJECT: /camunda
@@ -57,6 +59,8 @@ camunda-branch:
     - docker version
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
     - docker pull maven
+    - docker run maven
+    - mvn -v
   variables:
     DOCKER_FILE_PATH: ./camunda/
     DOCKER_IMAGE_SUBPROJECT: /camunda

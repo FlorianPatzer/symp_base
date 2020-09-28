@@ -44,6 +44,7 @@ mysql-branch:
 
 camunda-master:
   image: maven:3-jdk-8
+  before_script: mvn dependency:get -Dartifact=commons-collections:commons-collections:3.2.1
   variables:
     DOCKER_FILE_PATH: ./camunda/
     DOCKER_IMAGE_SUBPROJECT: /camunda
@@ -51,6 +52,8 @@ camunda-master:
     - .docker-build-master
 
 camunda-branch:
+  image: maven:3-jdk-8
+  before_script: mvn dependency:get -Dartifact=commons-collections:commons-collections:3.2.1
   variables:
     DOCKER_FILE_PATH: ./camunda/
     DOCKER_IMAGE_SUBPROJECT: /camunda
@@ -60,5 +63,8 @@ camunda-branch:
 maven_standalone_test:
   stage: test
   image: maven:3-jdk-8
-  script: mvn --version
+  script: 
+    -- mvn --version
+    -- mvn dependency:get -Dartifact=commons-collections:commons-collections:3.2.1
+
   

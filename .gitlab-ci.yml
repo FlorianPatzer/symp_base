@@ -45,7 +45,7 @@ mysql-branch:
 camunda-master:
   image: maven:latest
   script:
-    - mvn install camunda-standalone
+    - mvn install -f camunda-standalone
   #variables:
   #  DOCKER_FILE_PATH: ./camunda/
   #  DOCKER_IMAGE_SUBPROJECT: /camunda
@@ -55,7 +55,7 @@ camunda-master:
 camunda-branch:
   image: maven:latest
   script:
-    - mvn install camunda-standalone
+    - mvn install -f camunda-standalone
   #variables:
   #  DOCKER_FILE_PATH: ./camunda/
   #  DOCKER_IMAGE_SUBPROJECT: /camunda

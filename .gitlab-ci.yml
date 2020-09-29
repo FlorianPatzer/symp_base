@@ -56,28 +56,11 @@ camunda-branch:
   extends:
     - .docker-build-branch
 
-#camunda-standalone:
-#  stage: test 
-#  image: maven:latest
-#  script:
-#    - mvn install -DskipTests -f camunda-standalone
-
-camunda-manual-build:
+camunda-hub-pull:
   stage: test 
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
-    - docker build ./camunda
-  
-ubuntu-container:
-  image: ubuntu
-  before_script:
-    - apt update -y
-    - apt install -y maven 
-    - mvn -version
-    - apt-get install -y apt-transport-https \ca-certificates \curl \gnupg-agent \ software-properties-common
-    - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
-  script:
-    - docker build ./camunda
-
+    - docker pull camunda/camunda-bpm-platform
+    - docker tag camunda/camunda-bpm-platform gitlab-ext.iosb.fraunhofer.de:4567/symp/symp-docker/camunda
+    - docker push gitlab-ext.iosb.fraunhofer.de:4567/symp/symp-docker/camunda

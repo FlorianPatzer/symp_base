@@ -42,20 +42,6 @@ mysql-branch:
   extends:
     - .docker-build-branch
 
-camunda-master:
-  variables:
-    DOCKER_FILE_PATH: ./camunda/
-    DOCKER_IMAGE_SUBPROJECT: /camunda
-  extends:
-    - .docker-build-master
-
-camunda-branch:
-  variables:
-    DOCKER_FILE_PATH: ./camunda/
-    DOCKER_IMAGE_SUBPROJECT: /camunda
-  extends:
-    - .docker-build-branch
-
 camunda-hub-pull:
   stage: test 
   before_script:

@@ -43,6 +43,7 @@ mysql-branch:
     - .docker-build-branch
 
 camunda-hub-pull:
+  stage: build
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
@@ -50,10 +51,11 @@ camunda-hub-pull:
     - docker tag camunda/camunda-bpm-platform gitlab-ext.iosb.fraunhofer.de:4567/symp/symp-docker/camunda
     - docker push gitlab-ext.iosb.fraunhofer.de:4567/symp/symp-docker/camunda
 
-nginx-ingress:
+hello-world-webserver:
+  stage: build
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
-    - docker pull nginx/nginx-ingress
-    - docker tag nginx/nginx-ingress gitlab-ext.iosb.fraunhofer.de:4567/symp/symp-docker/nginx-ingress
-    - docker push gitlab-ext.iosb.fraunhofer.de:4567/symp/symp-docker/nginx-ingress
+    - docker pull strm/helloworld-http
+    - docker tag strm/helloworld-http gitlab-ext.iosb.fraunhofer.de:4567/symp/symp-docker/hello-world
+    - docker push gitlab-ext.iosb.fraunhofer.de:4567/symp/symp-docker/hello-world

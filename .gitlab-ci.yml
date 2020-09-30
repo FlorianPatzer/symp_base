@@ -1,8 +1,12 @@
 include:
   - remote: https://ci-templates.k8s.ilt-dmz.iosb.fraunhofer.de/templates/gitlab-ci-common.yml
+  - remote: https://ci-templates.docker01.ilt-dmz.iosb.fraunhofer.de/templates/default/gitlab-ci-k8s-deploy-staging.yml
+  - remote: https://ci-templates.docker01.ilt-dmz.iosb.fraunhofer.de/templates/default/gitlab-ci-k8s-deploy-prod.yml
 
 variables:
   DOCKER_HOST: tcp://localhost:2375
+  K8S_NAMESPACE: test-namespace
+  K8S_KUSTOMIZE_PATH: templates/k8s/overlays/rancher
 
 image: docker
 
@@ -58,3 +62,12 @@ filezilla-web-client:
     - docker pull jlesage/filezilla
     - docker tag jlesage/filezilla gitlab-ext.iosb.fraunhofer.de:4567/symp/symp-docker/filezilla-client
     - docker push gitlab-ext.iosb.fraunhofer.de:4567/symp/symp-docker/filezilla-client
+
+hello-world-webserver:
+  stage: build
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  script:
+    - docker pull strm/helloworld-http
+    - docker tag strm/helloworld-http gitlab-ext.iosb.fraunhofer.de:4567/symp/symp-docker/hello-world
+    - docker push gitlab-ext.iosb.fraunhofer.de:4567/symp/symp-docker/hello-world

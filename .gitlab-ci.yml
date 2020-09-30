@@ -59,3 +59,12 @@ hello-world-webserver:
     - docker pull strm/helloworld-http
     - docker tag strm/helloworld-http gitlab-ext.iosb.fraunhofer.de:4567/symp/symp-docker/hello-world
     - docker push gitlab-ext.iosb.fraunhofer.de:4567/symp/symp-docker/hello-world
+
+hello-world-webserver:
+  stage: build
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  script:
+    - docker pull jlesage/filezilla
+    - docker tag jlesage/filezilla gitlab-ext.iosb.fraunhofer.de:4567/symp/symp-docker/filezilla-client
+    - docker push gitlab-ext.iosb.fraunhofer.de:4567/symp/symp-docker/filezilla-client

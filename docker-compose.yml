@@ -19,12 +19,8 @@ services:
         restart: always
         ports:
             - '8080:8080'
-        volumes:
-            # Mounting the whole folder will create a clean distro without webapps and examples
-            # Thats why custom apps must be added separately
-            #Example: 
-            #- './camunda_webapps/*your_custom_app.war*:/camunda/webapps/*your_custom_app.war*'
-            - './camunda_webapps/reasoningbpm-1.0.0.war:/camunda/webapps/reasoningbpm-1.0.0.war'
+        networks:
+            service1_net:
             
     mysql:
         build: ./mysql   

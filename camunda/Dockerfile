@@ -2,7 +2,7 @@ FROM alpine:3.10 as builder
 
 ARG VERSION=7.14.0
 ARG DISTRO=tomcat
-ARG SNAPSHOT=true
+ARG SNAPSHOT=false
 
 ARG EE=false
 ARG USER
@@ -74,6 +74,8 @@ RUN addgroup -g 1000 -S camunda && \
     adduser -u 1000 -S camunda -G camunda -h /camunda -s /bin/bash -D camunda
 WORKDIR /camunda
 USER camunda
+
+COPY /webapps/reasoningbpm-1.0.0.war /camunda/webapps/reasoningbpm-1.0.0.war
 
 ENTRYPOINT ["/sbin/tini", "--"]
 CMD ["./camunda.sh"]

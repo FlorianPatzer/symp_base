@@ -18,9 +18,7 @@ The following services are started:
     - Connection is SSL encrypted with a self signed certificate
     
 - Camunda BPM
-    - In order to run custom apps, they have to be added under the volume sub-section of the camunda section in the **docker-compose.yml** file. 
-    A concrete example is to be found there.
-    - Mounting the whole **webapps* folder will lead to a clean Camunda distro withouth a cockpit and examples.([explained in the official repo](https://github.com/camunda/docker-camunda-bpm-platform#add-own-process-application))
+    - Custom webapps are be added in /camunda/webapps and a COPY command must be added to the Dockerfile 
 
 - MySQL
     - Runs on port 3306

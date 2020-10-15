@@ -65,5 +65,7 @@ filezilla-web-client:
 
 test:
   stage: test
+  image:
+    name: chatwork/kubectl
   script:
     - kubectl

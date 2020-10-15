@@ -1,6 +1,6 @@
 include:
   - remote: https://ci-templates.k8s.ilt-dmz.iosb.fraunhofer.de/templates/gitlab-ci-common.yml
-  - remote: https://ci-templates.docker01.ilt-dmz.iosb.fraunhofer.de/templates/default/gitlab-ci-k8s-deploy-staging.yml
+  - remote: https://ci-templates.k8s.ilt-dmz.iosb.fraunhofer.de/templates/gitlab-ci-k8s-deploy.yml
   - remote: https://ci-templates.docker01.ilt-dmz.iosb.fraunhofer.de/templates/default/gitlab-ci-k8s-deploy-prod.yml
 
 variables:

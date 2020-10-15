@@ -5,33 +5,35 @@ This repo automates the start of the SyMP framework within Docker
 The following services are started:
 - Camunda BPM 
 - MySQL DB
-- FTP Server - vsftpd
+- Simple Read-Only FTP Server 
 
 ### Prerequisites
 - Docker-compose
 
 ### Configuration
-- FTP Server
+- VSFTP Server
     - Runs on port 21
-    - Default username: admin
-    - Default password: admin
-
+    - Anonymous connections are enabled 
+    - Upload are allowed in the /upload directory 
+    - Connection is SSL encrypted with a self signed certificate
+    
 - Camunda BPM
-    - In order to run custom apps, they have to be added under the volume sub-section of the camunda section in the **docker-compose.yml** file. 
-    A concrete example is to be found there.
-    - Mounting the whole **webapps* folder will lead to a clean Camunda distro withouth a cockpit and examples.([explained in the official repo](https://github.com/camunda/docker-camunda-bpm-platform#add-own-process-application))
+    - Custom webapps are be added in /camunda/webapps and a COPY command must be added to the Dockerfile 
 
 - MySQL
     - Runs on port 3306
     - Default password: 0b53c4f
 
-### Installing
+### Running the application
 
 After cloning the repository, start a terminal in it's direcotry and execute: 
 
 ```
 docker-compose up
 ```
+
+## Known Issues
+The ftp container seams to not accept setfacl operations if docker storage driver "aufs" is configured. Since these operations are necessary to be performed on startup, the docker storage driver should be changed ("overlay2" has proven to be a good alternative).
 
 ## License
 MIT

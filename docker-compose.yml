@@ -1,52 +1,40 @@
 version: '3.3'
 services:
-    vsftpd:
-        image: fauria/vsftpd
-        volumes:
-            - './ftp_dir:/home/vsftpd'
+    ftp:
+        build: ./ftp
         ports:
-            - '20:20'
-            - '21:21'
-            - '21100-21110:21100-21110'
+            - 20-21:20-21
+            - 21100-21110:21100-21110
+            - 990:990
+        container_name: ftp
         environment:
-            - FTP_USER=admin
-            - FTP_PASS=admin
-            - PASV_ADDRESS=127.0.0.1
-            - PASV_MIN_PORT=21100
-            - PASV_MAX_PORT=21110
-        container_name: vsftpd
+            FTP_USER: admin
+            FTP_PASS: admin
         restart: always
+        networks:
+            service1_net:
         
     camunda-bpm-platform:
-        image: 'camunda/camunda-bpm-platform:latest'
+        build: ./camunda
         container_name: camunda
         restart: always
         ports:
             - '8080:8080'
-        #volumes:
-            # Mounting the whole folder will create a clean distro without webapps and examples
-            # Thats why custom apps must be added separately
-            #Example: 
-            #- './camunda_webapps/*your_custom_app.war*:/camunda/webapps/*your_custom_app.war*'
+        networks:
+            service1_net:
             
     mysql:
-        image: mysql   
+        build: ./mysql   
         command: --default-authentication-plugin=mysql_native_password
+        container_name: mysql
         environment:
             MYSQL_ROOT_PASSWORD: 0b53c4f
             MYSQL_DATABASE: security_analysis_repository
-        volumes:
-            - './mysql_config:/etc/mysql/conf.d'
+        ports:
+            - '3306:3306'
         networks:
             service1_net:
-                ipv4_address: 172.22.0.100
-            
-            
+                      
 networks:
   service1_net:
-    ipam:
-      driver: default
-      config:
-        - subnet: 172.22.0.0/16  
-           
      

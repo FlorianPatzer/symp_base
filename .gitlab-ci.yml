@@ -5,7 +5,7 @@ include:
 
 variables:
   DOCKER_HOST: tcp://localhost:2375
-  K8S_NAMESPACE: test-namespace
+  K8S_NAMESPACE: symp
   K8S_KUSTOMIZE_PATH: templates/k8s/overlays/rancher
 
 image: docker

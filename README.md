@@ -32,5 +32,8 @@ After cloning the repository, start a terminal in it's direcotry and execute:
 docker-compose up
 ```
 
+## Known Issues
+The ftp container seams to not accept setfacl operations if docker storage driver "aufs" is configured. Since these operations are necessary to be performed on startup, the docker storage driver should be changed ("overlay2" has proven to be a good alternative).
+
 ## License
 MIT

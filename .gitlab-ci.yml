@@ -68,6 +68,6 @@ test:
   image:
     name: bitnami/kubectl
   before_script:
-    - echo __CI_PROJECT_NAME__
+    - echo ${CI_REGISTRY_IMAGE}
   script:
     - kubectl

@@ -1,0 +1,51 @@
+include:
+  - remote: https://ci-templates.k8s.ilt-dmz.iosb.fraunhofer.de/templates/gitlab-ci-common.yml
+
+variables:
+  DOCKER_HOST: tcp://localhost:2375
+
+image: docker
+
+services:
+  - docker:18.09-dind
+
+default:
+  tags:
+    - ILT
+
+ftp-master:
+  variables:
+    DOCKER_FILE_PATH: ./ftp/
+    DOCKER_IMAGE_SUBPROJECT: /ftp
+  extends:
+    - .docker-build-master
+
+ftp-branch:
+  variables:
+    DOCKER_FILE_PATH: ./ftp/
+    DOCKER_IMAGE_SUBPROJECT: /ftp
+  extends:
+    - .docker-build-branch
+
+mysql-master:
+  variables:
+    DOCKER_FILE_PATH: ./mysql/
+    DOCKER_IMAGE_SUBPROJECT: /mysql
+  extends:
+    - .docker-build-master
+
+mysql-branch:
+  variables:
+    DOCKER_FILE_PATH: ./mysql/
+    DOCKER_IMAGE_SUBPROJECT: /mysql
+  extends:
+    - .docker-build-branch
+
+camunda:
+  stage: build
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  script:
+    - docker pull camunda/camunda-bpm-platform
+    - docker tag camunda/camunda-bpm-platform gitlab-ext.iosb.fraunhofer.de:4567/symp/symp-docker/camunda
+    - docker push gitlab-ext.iosb.fraunhofer.de:4567/symp/symp-docker/camunda

@@ -47,11 +47,11 @@ RUN mkdir -p /home/vsftpd/
 RUN chown -R ftp:ftp /home/vsftpd/
 
 RUN mkdir -p /var/ftp/upload
+COPY /examples /var/ftp/upload
+
 RUN chown -R ftp:ftp /var/ftp/upload
 RUN chmod -R 777 /var/ftp/upload
 RUN chmod g+s /var/ftp/upload
-
-COPY /examples /var/ftp/upload
 
 VOLUME /home/vsftpd
 VOLUME /var/log/vsftpd

@@ -67,5 +67,7 @@ test:
   stage: test
   image:
     name: bitnami/kubectl
+  before_script:
+    - echo __CI_PROJECT_NAME__
   script:
     - kubectl

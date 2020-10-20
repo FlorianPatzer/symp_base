@@ -41,11 +41,20 @@ mysql-branch:
   extends:
     - .docker-build-branch
 
-camunda:
-  stage: build
-  before_script:
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
-  script:
-    - docker pull camunda/camunda-bpm-platform
-    - docker tag camunda/camunda-bpm-platform gitlab-ext.iosb.fraunhofer.de:4567/symp/symp-docker/camunda
-    - docker push gitlab-ext.iosb.fraunhofer.de:4567/symp/symp-docker/camunda
+camunda-master:
+  variables:
+    DOCKER_FILE_PATH: ./camunda/
+    DOCKER_IMAGE_SUBPROJECT: /camunda
+  enviroment:
+    - JAVA_OPTS='-Xmx4g'
+  extends:
+    - .docker-build-master
+
+camunda-branch:
+  variables:
+    DOCKER_FILE_PATH: ./camunda/
+    DOCKER_IMAGE_SUBPROJECT: /camunda
+  enviroment:
+    - JAVA_OPTS='-Xmx4g'
+  extends:
+    - .docker-build-branch

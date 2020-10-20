@@ -45,8 +45,6 @@ camunda-master:
   variables:
     DOCKER_FILE_PATH: ./camunda/
     DOCKER_IMAGE_SUBPROJECT: /camunda
-  enviroment:
-    - JAVA_OPTS='-Xmx4g'
   extends:
     - .docker-build-master
 
@@ -54,7 +52,5 @@ camunda-branch:
   variables:
     DOCKER_FILE_PATH: ./camunda/
     DOCKER_IMAGE_SUBPROJECT: /camunda
-  enviroment:
-    - JAVA_OPTS='-Xmx4g'
   extends:
     - .docker-build-branch

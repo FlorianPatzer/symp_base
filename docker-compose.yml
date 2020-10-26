@@ -34,20 +34,6 @@ services:
             - '3306:3306'
         networks:
             service1_net:
-
-    camunda-master:
-        variables:
-            DOCKER_FILE_PATH: ./camunda/
-            DOCKER_IMAGE_SUBPROJECT: /camunda
-        extends:
-            - .docker-build-master
-
-    camunda-branch:
-        variables:
-            DOCKER_FILE_PATH: ./camunda/
-            DOCKER_IMAGE_SUBPROJECT: /camunda
-        extends:
-            - .docker-build-branch
                                   
 networks:
   service1_net:

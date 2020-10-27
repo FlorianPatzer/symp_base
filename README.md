@@ -23,7 +23,7 @@ The following services are started:
 
 #### MySQL:
     - Runs on port 3306
-    - Default password: 0b53c4f
+    - Default password: 0b53c4f 
 
 ### 1.3 Running the application
 

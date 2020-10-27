@@ -1,0 +1,272 @@
+mode: 'cli'
+owl_ontology_repository: '../../../'
+owl_input_ontology_file: '../../../system_base_ontology.owl'
+owl_output_ontology_file: 'output/generated-pfsense1-ontology.owl'
+owl_output_ontology_file_type: 'rdfxml'
+owl_ontology_namespace: 'http://iosb.fraunhofer.de/ICS-Security#'
+owl_unique_identifier_type: 'object'
+owl_unique_identifier_object: 'machine'
+ontology_preprocessor: true
+ontology_postprocessor: true
+
+commands_from_file: true
+commands_file: "../command_outputs/commands_pfsense1"
+commands:
+    - command: 'uname -n'
+      object: 'machine'
+      owl_class: 'HardwareDevice'
+      owl_class_parent: 'Asset'
+      regex: '(.+)'
+      regex_rewind: true
+      objects:
+          - object: 'hostname'
+            owl_dataProperty: 'hostname'
+            owl_dataProperty_parent: 'owl_topDataProperty'
+            owl_dataProperty_domain_object: 'machine'
+            regex: '(.+)'
+    -
+        command: 'uname -i'
+        owl_class: 'OperatingSystem'
+        owl_class_parent: 'Configuration'
+        owl_objectProperty: 'runsOS'
+        object: 'operatingSystem'
+        regex: '(.+)'
+        regex_rewind: true
+        objects:
+            -
+                object: 'distributionName'
+                owl_dataProperty: 'distribution'
+                owl_dataProperty_parent: 'owl_topDataProperty'
+                owl_dataProperty_domain_object: 'operatingSystem'
+                regex: '(.+)'
+    -
+        command: 'uname -r'
+        object: 'osVersion'
+        owl_dataProperty: 'version'
+        owl_dataProperty_parent: 'owl_topDataProperty'
+        owl_dataProperty_domain_object: 'operatingSystem'
+        regex: '(.+)'
+    -
+        command: 'ifconfig'
+        object: 'network_interfaces'
+        iterate_subtree_mapping: true
+        objects:
+            -
+                object: 'ethernet_interface'
+                owl_class: 'EthernetInterface'
+                owl_class_parent: 'Interface'
+                owl_objectProperty: 'interface'
+                regex: '(\S+?): +flags'
+                owl_iri_suffix: 'EthernetInterface'
+                regex_rewind: true
+                objects:
+                    -
+                        object: 'name'
+                        owl_dataProperty: 'hasName'
+                        owl_dataProperty_parent: 'owl:topDataProperty'
+                        owl_dataProperty_domain_object: 'ethernet_interface'
+                        regex: '(\S+?):\s+flags'
+                    -
+                        object: 'mac'
+                        owl_dataProperty: 'macAddress'
+                        owl_dataProperty_parent: 'owl:topDataProperty'
+                        owl_dataProperty_domain_object: 'ethernet_interface'
+                        regex: 'ether (([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2}))'
+            -
+                object: 'ip_interface'
+                owl_class: 'IpV4Interface'
+                owl_class_parent: 'Interface'
+                owl_objectProperty: 'interface'
+                owl_iri_suffix: 'IpV4Interface'
+                regex: '(\S+?): +flags'
+                regex_rewind: true
+                owl_postprocessing_functions:
+                    - 'addIpV4Networks'
+                objects:
+                    -
+                        object: 'name'
+                        owl_dataProperty: 'hasName'
+                        owl_dataProperty_parent: 'owl:topDataProperty'
+                        owl_dataProperty_domain_object: 'ip_interface'
+                        regex: '(\S+?):\s+flags'
+                    -
+                        object: 'ip'
+                        owl_dataProperty: 'ipV4Address'
+                        owl_dataProperty_parent: 'owl:topDataProperty'
+                        owl_dataProperty_domain_object: 'ip_interface' #currently only predecessors of the same yml branch can be selected as domain_objects
+                        owl_preprocessing_function: 'ipV4ToInteger'
+                        regex: 'inet ([0-9]+?\.[0-9]+?\.[0-9]+?\.[0-9]+)'
+                    -
+                        object: 'netmask'
+                        owl_dataProperty: 'prefixBits'
+                        owl_dataProperty_parent: 'owl:topDataProperty'
+                        owl_dataProperty_domain_object: 'ip_interface'
+                        data_type: 'int'
+                        owl_preprocessing_function: 'ipV4HexNetmaskToInteger'
+                        regex: 'netmask (0x[0-9a-f]{8})'
+#
+#Packet Filtering (PF) - running on pfsense
+    -
+        command: 'pfctl -s rules'
+        object: 'pfsense_rules'
+        iterate_subtree_mapping: true
+        objects:
+            -
+                object: 'rule'
+                owl_class: 'PfRule'
+                owl_class_parent: 'Pf'
+                owl_postprocessing_functions:
+                    - 'setPfFirstRule'
+                    - 'setAndLinkPfPreviousRule'
+ #                   - 'addPfInterfaceRelation'
+                regex_rewind: true
+                regex: '\n((?:block|pass)) '
+                objects:
+                    -
+                        object: 'action'
+                        owl_dataProperty: 'pfAction'
+                        owl_dataProperty_parent: 'owl:topDataProperty'
+                        owl_dataProperty_domain_object: 'rule'
+                        regex: '\n((?:block|pass)) '
+                    -
+                        object: 'direction'
+                        owl_dataProperty: 'pfDirection'
+                        owl_dataProperty_parent: 'owl:topDataProperty'
+                        owl_dataProperty_domain_object: 'rule'
+                        regex: '^[^\n]*? (in|out) '
+                    -
+                        object: 'quick'
+                        owl_dataProperty: 'pfQuick'
+                        owl_dataProperty_parent: 'owl:topDataProperty'
+                        owl_dataProperty_domain_object: 'rule'
+                        data_type: 'bool'
+                        default_value: false
+                        owl_preprocessing_function: 'quickToBoolean'
+                        regex: '^[^\n]*? (quick) '
+                    -
+                        object: 'interface'
+                        owl_dataProperty: 'pfInterface'
+                        owl_dataProperty_parent: 'owl:topDataProperty'
+                        owl_dataProperty_domain_object: 'rule'
+                        regex: '^[^\n]*? on ((?:[!] )?\S+) '
+                    -
+                        object: 'protocol'
+                        owl_dataProperty: 'pfProtocol'
+                        owl_dataProperty_parent: 'owl:topDataProperty'
+                        owl_dataProperty_domain_object: 'rule'
+                        regex: '^[^\n]*? proto (\S+)'
+                    -
+                        object: 'src_address'
+                        owl_class: 'IpV4Interface'
+                        owl_class_parent: 'Interface'
+                        owl_objectProperty: 'srcInterface'
+                        owl_iri_suffix: 'IpV4Interface'
+                        owl_objectProperty_domain_object: 'rule'
+                        regex: '^[^\n]*? from <?([^< >!"\n]+?)>? (?:port|to)'
+                        regex_rewind: true
+                        owl_postprocessing_functions:
+                            - 'addIpV4Network'
+                        objects:
+                            -
+                                object: 'name'
+                                owl_dataProperty: 'hasName'
+                                owl_dataProperty_parent: 'owl:topDataProperty'
+                                owl_dataProperty_domain_object: 'src_address'
+                                regex: '^[^\n]*? from ([^< >!"\n]+?) (?:port|to)'
+                                regex_rewind: true
+                            -
+                                object: 'ip'
+                                owl_dataProperty: 'ipV4Address'
+                                owl_dataProperty_parent: 'owl:topDataProperty'
+                                owl_dataProperty_domain_object: 'src_address' #currently only predecessors of the same yml branch can be selected as domain_objects
+                                owl_preprocessing_function: 'pfAddressIpV4ToInteger'
+                                regex: '^[^\n]*? from ([^ <>!"\n]+?) (?:port|to)'
+                                regex_rewind: true
+                            -
+                                object: 'netmask'
+                                owl_dataProperty: 'prefixBits'
+                                owl_dataProperty_parent: 'owl:topDataProperty'
+                                owl_dataProperty_domain_object: 'src_address'
+                                data_type: 'int'
+                                owl_preprocessing_function: 'pfAddressIpV4NetmaskToInteger'
+                                regex: '^[^\n]*? from ([^< >!"\n]+?) (?:port|to)'
+                    -
+                        object: 'src_port'
+                        owl_dataProperty: 'pfSourcePortDescription'
+                        owl_dataProperty_parent: 'owl:topDataProperty'
+                        owl_dataProperty_domain_object: 'rule'
+                        regex: '^[^\n]*? from [^"\n]*? port ([^"]+?) to'
+                    -
+                        object: 'dst_address'
+                        owl_class: 'IpV4Interface'
+                        owl_class_parent: 'Interface'
+                        owl_objectProperty: 'dstInterface'
+                        owl_iri_suffix: 'IpV4Interface'
+                        owl_objectProperty_domain_object: 'rule'
+                        regex: '^[^\n]*? to !? ?([^< >"\n]+?)(?: port| flags| state| label| modulate| keep|\n)'
+                        regex_rewind: true
+                        owl_postprocessing_functions:
+                            - 'addIpV4Network'
+                        objects:
+                            -
+                                object: 'name'
+                                owl_dataProperty: 'hasName'
+                                owl_dataProperty_parent: 'owl:topDataProperty'
+                                owl_dataProperty_domain_object: 'dst_address'
+                                regex: '^[^\n]*? to !? ?([^<> !"\n]+?)(?: port| flags| state| label| modulate| keep|\n)'
+                                regex_rewind: true
+                            -
+                                object: 'ip'
+                                owl_dataProperty: 'ipV4Address'
+                                owl_dataProperty_parent: 'owl:topDataProperty'
+                                owl_dataProperty_domain_object: 'dst_address' #currently only predecessors of the same yml branch can be selected as domain_objects
+                                owl_preprocessing_function: 'pfAddressIpV4ToInteger'
+                                regex: '^[^\n]*? to !? ?([^< >!"\n]+?)(?: port| flags| state| label| modulate| keep|\n)'
+                                regex_rewind: true
+                            -
+                                object: 'netmask'
+                                owl_dataProperty: 'prefixBits'
+                                owl_dataProperty_parent: 'owl:topDataProperty'
+                                owl_dataProperty_domain_object: 'dst_address'
+                                data_type: 'int'
+                                owl_preprocessing_function: 'pfAddressIpV4NetmaskToInteger'
+                                regex: '^[^\n]*? to !? ?([^< >!"\n]+?)(?: port| flags| state| label| modulate| keep|\n)'
+                    -
+                        object: 'dst_port'
+                        owl_dataProperty: 'pfDestinationPortDescription'
+                        owl_dataProperty_domain_object: 'rule'
+                        owl_dataProperty_parent: 'owl:topDataProperty'
+                        regex: '^[^\n]*? to [^"\n]+? port ([^"\n]+?)(?: flags| state| label| modulate| keep|\n)'
+    -
+        command: 'cat /etc/services'
+        object: 'service_port_mapping'
+        iterate_subtree_mapping: true
+        objects:
+            -
+                object: 'mapping'
+                regex: '\n([0-9a-zA-Z\-]+)\s+'
+                regex_rewind: true
+                owl_class: 'Service'
+                owl_class_parent: 'Configuration'
+                owl_postprocessing_functions:
+                    - 'addToServiceList'
+                objects:
+                    -
+                        object: 'name'
+                        regex: '\n([0-9a-zA-Z\-]+)\s+'
+                        owl_dataProperty: 'hasName'
+                        owl_dataProperty_parent: 'owl:topDataProperty'
+                        owl_dataProperty_domain_object: 'mapping'
+                    -
+                        object: 'number'
+                        regex: '^\s*([0-9]+)/'
+                        owl_dataProperty: 'port'
+                        owl_dataProperty_parent: 'owl:topDataProperty'
+                        owl_dataProperty_domain_object: 'mapping'
+                        data_type: 'int'
+                    -
+                        object: 'protocol'
+                        regex: '^/([a-z]+)\s+'
+                        owl_dataProperty: 'layer4Protocol'
+                        owl_dataProperty_parent: 'owl:topDataProperty'
+                        owl_dataProperty_domain_object: 'mapping'

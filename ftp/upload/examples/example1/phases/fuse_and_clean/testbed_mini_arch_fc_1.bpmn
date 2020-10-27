@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_17ur0co" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.3.0">
+  <bpmn:process id="Process_0q5xhz0" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" name="s">
+      <bpmn:outgoing>SequenceFlow_0myprja</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="ServiceTask_1ordkgy" name="Ontology Upload Task" camunda:resultVariable="ontology1" camunda:type="external" camunda:topic="ontupload">
+      <bpmn:extensionElements>
+        <camunda:properties>
+          <camunda:property id="fraunhofer-type" name="type" value="ONT" />
+        </camunda:properties>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="Input_1ql8jkl">..\webapps\reasoning_bpm_war_exploded\DeviceInstanceOntologies\component-model-cloudserver.owl</camunda:inputParameter>
+          <camunda:inputParameter name="Input_1021ib9">..\webapps\reasoning_bpm_war_exploded\DeviceInstanceOntologies\component-model-controlstation.owl</camunda:inputParameter>
+          <camunda:inputParameter name="Input_2nu6von">..\webapps\reasoning_bpm_war_exploded\DeviceInstanceOntologies\component-model-pfsense1.owl</camunda:inputParameter>
+          <camunda:inputParameter name="Input_11o6l2o">..\webapps\reasoning_bpm_war_exploded\DeviceInstanceOntologies\component-model-pfsense2.owl</camunda:inputParameter>
+          <camunda:inputParameter name="Input_01omclc">..\webapps\reasoning_bpm_war_exploded\DeviceInstanceOntologies\component-model-RevPi.owl</camunda:inputParameter>
+          <camunda:inputParameter name="Input_02jmkes">..\webapps\reasoning_bpm_war_exploded\DeviceInstanceOntologies\component-model-sql_server.owl</camunda:inputParameter>
+          <camunda:inputParameter name="Input_13ivmmi">..\webapps\reasoning_bpm_war_exploded\DeviceInstanceOntologies\component-model-workstation1.owl</camunda:inputParameter>
+          <camunda:inputParameter name="Input_05vam0l">..\webapps\reasoning_bpm_war_exploded\DeviceInstanceOntologies\component-model-workstation2.owl</camunda:inputParameter>
+          <camunda:inputParameter name="Input_0qt8mkl">..\webapps\reasoning_bpm_war_exploded\DeviceInstanceOntologies\component-model-workstation3.owl</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_0myprja</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0uf7yvk</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="EndEvent_0h7ouvu" name="e">
+      <bpmn:incoming>SequenceFlow_0gxxgmp</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0uf7yvk" sourceRef="ServiceTask_1ordkgy" targetRef="ServiceTask_15f4xhl" />
+    <bpmn:sequenceFlow id="SequenceFlow_0myprja" sourceRef="StartEvent_1" targetRef="ServiceTask_1ordkgy" />
+    <bpmn:serviceTask id="ServiceTask_15f4xhl" name="Ontology Merge Task1" camunda:resultVariable="ontology1" camunda:type="external" camunda:topic="ontmerge">
+      <bpmn:extensionElements>
+        <camunda:properties>
+          <camunda:property id="fraunhofer-type" name="type" value="ONTMERGE" />
+        </camunda:properties>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_0uf7yvk</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0jvromf</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="SequenceFlow_0jvromf" sourceRef="ServiceTask_15f4xhl" targetRef="ParallelGateway_06teikn" />
+    <bpmn:parallelGateway id="ParallelGateway_06teikn">
+      <bpmn:incoming>SequenceFlow_0jvromf</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1eu98v2</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_1j364gp</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_1eu98v2" sourceRef="ParallelGateway_06teikn" targetRef="ServiceTask_1qbyx9r" />
+    <bpmn:serviceTask id="ServiceTask_18rncdb" name="Ontology Merge Task2" camunda:resultVariable="ontology1" camunda:type="external" camunda:topic="ontremerge">
+      <bpmn:extensionElements>
+        <camunda:properties>
+          <camunda:property id="fraunhofer-type" name="type" value="ONTMERGE" />
+        </camunda:properties>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_136gnyo</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0b90csm</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="SequenceFlow_02ke0x5" sourceRef="ServiceTask_15rwtlw" targetRef="ServiceTask_0p0pslk" />
+    <bpmn:parallelGateway id="ParallelGateway_00uclyy">
+      <bpmn:incoming>SequenceFlow_0csmumy</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_0chcwky</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_136gnyo</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_0csmumy" sourceRef="ServiceTask_1qbyx9r" targetRef="ParallelGateway_00uclyy" />
+    <bpmn:serviceTask id="ServiceTask_1qbyx9r" name="Service Merge Task" camunda:resultVariable="ontology1" camunda:type="external" camunda:topic="service_merger">
+      <bpmn:extensionElements>
+        <camunda:properties>
+          <camunda:property id="fraunhofer-type" name="type" value="GENONT" />
+        </camunda:properties>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_1eu98v2</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0csmumy</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="ServiceTask_0p0pslk" name="Subnetwork Task" camunda:resultVariable="swrl2" camunda:type="external" camunda:topic="swrl">
+      <bpmn:extensionElements>
+        <camunda:properties>
+          <camunda:property id="fraunhofer-type" name="type" value="SWRL" />
+        </camunda:properties>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="Input_3shaqas">ICS-Security:Network(?n1)
+^ ICS-Security:Network(?n2)
+^ ICS-Security:ipV4Address(?n1, ?na1)
+^ ICS-Security:ipV4Address(?n2, ?na2)
+^ ICS-Security:prefixBits(?n1, ?np1)
+^ ICS-Security:prefixBits(?n2, ?np2)
+^ swrlb:lessThan(?np2, ?np1)
+^ swrlb:subtract(?diff, ?np1, ?np2)
+^ swrlb:pow(?divisor, 2, ?diff)
+^ swrlb:divide(?res1, ?na1, ?divisor) ^ swrlb:equal(?na2, ?res1) -&gt; ICS-Security:subnet(?n2, ?n1)</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_02ke0x5</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0chcwky</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="SequenceFlow_0chcwky" sourceRef="ServiceTask_0p0pslk" targetRef="ParallelGateway_00uclyy" />
+    <bpmn:sequenceFlow id="SequenceFlow_136gnyo" sourceRef="ParallelGateway_00uclyy" targetRef="ServiceTask_18rncdb" />
+    <bpmn:sequenceFlow id="SequenceFlow_0gxxgmp" sourceRef="ServiceTask_0xx9o1j" targetRef="EndEvent_0h7ouvu" />
+    <bpmn:serviceTask id="ServiceTask_0xx9o1j" name="SWRL Task" camunda:resultVariable="swrl2" camunda:type="external" camunda:topic="swrl">
+      <bpmn:documentation>add asset network association; add containsRule properties</bpmn:documentation>
+      <bpmn:extensionElements>
+        <camunda:properties>
+          <camunda:property id="fraunhofer-type" name="type" value="SWRL" />
+        </camunda:properties>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="Input_279pkj7">ICS-Security:Asset(?a) ^ ICS-Security:Network(?n) ^ ICS-Security:IpV4Interface(?i) ^ ICS-Security:isInNetwork(?i, ?n)^ICS-Security:interface(?a,?i) -&gt; ICS-Security:isInNetwork(?a, ?n)</camunda:inputParameter>
+          <camunda:inputParameter name="Input_1om6akb">ICS-Security:containsRule(?config,?firstRule)^ICS-Security:pfNextRule(?firstRule,?secondRule)-&gt;ICS-Security:containsRule(?config,?secondRule)</camunda:inputParameter>
+          <camunda:inputParameter name="Input_316dgkq">ICS-Security:IpV4Interface(?i) ^ ICS-Security:isInNetwork(?i, ?n)^ICS-Security:parentNetwork(?n,?pn) -&gt; ICS-Security:isInNetwork(?i, ?pn)</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_0b90csm</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0gxxgmp</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="SequenceFlow_0b90csm" sourceRef="ServiceTask_18rncdb" targetRef="ServiceTask_0xx9o1j" />
+    <bpmn:serviceTask id="ServiceTask_15rwtlw" name="Network Merge Task" camunda:resultVariable="swrl2" camunda:type="external" camunda:topic="swrl">
+      <bpmn:extensionElements>
+        <camunda:properties>
+          <camunda:property id="fraunhofer-type" name="type" value="SWRL" />
+        </camunda:properties>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="Input_048ubpu">ICS-Security:Network(?n1)^ICS-Security:Network(?n2)^ICS-Security:prefixBits(?n1,?pb1)^ICS-Security:prefixBits(?n2, ?pb2)^swrlb:equal(?pb1, ?pb2)^ICS-Security:ipV4Address(?n1, ?a1)^ICS-Security:ipV4Address(?n2, ?a2)^swrlb:equal(?a1, ?a2)-&gt;sameAs(?n1, ?n2)</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_1j364gp</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_02ke0x5</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="SequenceFlow_1j364gp" sourceRef="ParallelGateway_06teikn" targetRef="ServiceTask_15rwtlw" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_0q5xhz0">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="194" y="142" width="6" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_1ordkgy_di" bpmnElement="ServiceTask_1ordkgy">
+        <dc:Bounds x="260" y="70" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_0h7ouvu_di" bpmnElement="EndEvent_0h7ouvu">
+        <dc:Bounds x="1552" y="172" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1568" y="215" width="6" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0uf7yvk_di" bpmnElement="SequenceFlow_0uf7yvk">
+        <di:waypoint x="360" y="110" />
+        <di:waypoint x="400" y="110" />
+        <di:waypoint x="400" y="117" />
+        <di:waypoint x="440" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0myprja_di" bpmnElement="SequenceFlow_0myprja">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="238" y="117" />
+        <di:waypoint x="238" y="110" />
+        <di:waypoint x="260" y="110" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_15f4xhl_di" bpmnElement="ServiceTask_15f4xhl">
+        <dc:Bounds x="440" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0jvromf_di" bpmnElement="SequenceFlow_0jvromf">
+        <di:waypoint x="540" y="117" />
+        <di:waypoint x="595" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ParallelGateway_06teikn_di" bpmnElement="ParallelGateway_06teikn">
+        <dc:Bounds x="595" y="92" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1eu98v2_di" bpmnElement="SequenceFlow_1eu98v2">
+        <di:waypoint x="620" y="142" />
+        <di:waypoint x="620" y="310" />
+        <di:waypoint x="741" y="310" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_18rncdb_di" bpmnElement="ServiceTask_18rncdb">
+        <dc:Bounds x="1110" y="150" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_02ke0x5_di" bpmnElement="SequenceFlow_02ke0x5">
+        <di:waypoint x="790" y="117" />
+        <di:waypoint x="840" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ParallelGateway_00uclyy_di" bpmnElement="ParallelGateway_00uclyy">
+        <dc:Bounds x="1005" y="165" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0csmumy_di" bpmnElement="SequenceFlow_0csmumy">
+        <di:waypoint x="841" y="290" />
+        <di:waypoint x="1030" y="290" />
+        <di:waypoint x="1030" y="215" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_1qbyx9r_di" bpmnElement="ServiceTask_1qbyx9r">
+        <dc:Bounds x="741" y="250" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_0p0pslk_di" bpmnElement="ServiceTask_0p0pslk">
+        <dc:Bounds x="840" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0chcwky_di" bpmnElement="SequenceFlow_0chcwky">
+        <di:waypoint x="940" y="117" />
+        <di:waypoint x="1030" y="117" />
+        <di:waypoint x="1030" y="165" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_136gnyo_di" bpmnElement="SequenceFlow_136gnyo">
+        <di:waypoint x="1055" y="190" />
+        <di:waypoint x="1110" y="190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0gxxgmp_di" bpmnElement="SequenceFlow_0gxxgmp">
+        <di:waypoint x="1420" y="190" />
+        <di:waypoint x="1552" y="190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_0xx9o1j_di" bpmnElement="ServiceTask_0xx9o1j">
+        <dc:Bounds x="1320" y="150" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0b90csm_di" bpmnElement="SequenceFlow_0b90csm">
+        <di:waypoint x="1210" y="190" />
+        <di:waypoint x="1320" y="190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_15rwtlw_di" bpmnElement="ServiceTask_15rwtlw">
+        <dc:Bounds x="690" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1j364gp_di" bpmnElement="SequenceFlow_1j364gp">
+        <di:waypoint x="645" y="117" />
+        <di:waypoint x="690" y="117" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

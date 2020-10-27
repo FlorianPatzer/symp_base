@@ -1,0 +1,702 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xml:base="http://iosb.fraunhofer.de/ICS-Security"
+         xmlns="http://iosb.fraunhofer.de/ICS-Security#"
+         xmlns:term="http://purl.org/dc/terms/"
+         xmlns:vann="http://purl.org/vocab/vann/">
+
+<owl:Ontology rdf:about="http://iosb.fraunhofer.de/ICS-Security">
+  <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.0</owl:versionInfo>
+  <term:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-01-28T00:00:00</term:created>
+  <term:creator>Florian Patzer &lt;florian.patzer@iosb.fraunhofer.de&gt;</term:creator>
+  <term:description xml:lang="en">The ICS Security Ontology represents configuration of hardware and software components and is especially suitable for inference of network knowledge. This ontology is the example ontology for the System Model Processing Framework (SyMP).</term:description>
+  <term:license>license should go here</term:license>
+  <term:title xml:lang="en">ICS Security Ontology</term:title>
+  <vann:preferredNamespaceUri>http://iosb.fraunhofer.de/ICS-Security#</vann:preferredNamespaceUri>
+</owl:Ontology>
+
+<owl:ObjectProperty rdf:about="#allowedFlow">
+  <rdfs:range rdf:resource="#AllowedFlow"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#assignedDmz"/>
+
+<owl:ObjectProperty rdf:about="#assignedToNetwork">
+  <rdfs:domain rdf:resource="#Interface"/>
+  <rdfs:range rdf:resource="#Network"/>
+  <rdfs:subPropertyOf rdf:resource="#isInNetwork"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#beforePfRule">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#communicates">
+  <rdfs:subPropertyOf rdf:resource="#connected"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#compatible">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#connected">
+  <rdfs:subPropertyOf rdf:resource="#compatible"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#connectedIgnoredDestinationPort">
+  <rdfs:subPropertyOf rdf:resource="#compatible"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#connectedIgnoredSourcePort">
+  <rdfs:subPropertyOf rdf:resource="#compatible"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#containsInterface">
+  <rdfs:domain rdf:resource="#Network"/>
+  <rdfs:range rdf:resource="#Interface"/>
+  <owl:inverseOf rdf:resource="#isInNetwork"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#containsNetwork"/>
+
+<owl:ObjectProperty rdf:about="#containsRule"/>
+
+<owl:ObjectProperty rdf:about="#destinationPort">
+  <rdfs:domain rdf:resource="#AllowedFlow"/>
+  <rdfs:range rdf:resource="#PortRange"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#directNeighborOf">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#dstInterface"/>
+
+<owl:ObjectProperty rdf:about="#dstNetwork"/>
+
+<owl:ObjectProperty rdf:about="#firewallConfig"/>
+
+<owl:ObjectProperty rdf:about="#firewallRule">
+  <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#inputInterface"/>
+
+<owl:ObjectProperty rdf:about="#installedSoftware">
+  <rdfs:comment xml:lang="en">A software inventory contains all installed software on a device.</rdfs:comment>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#interface">
+  <rdfs:domain rdf:resource="#Asset"/>
+  <rdfs:range rdf:resource="#Interface"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#isInNetwork">
+  <rdfs:domain rdf:resource="#Interface"/>
+  <rdfs:range rdf:resource="#Network"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#parentNetwork">
+  <owl:inverseOf rdf:resource="#subnet"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#pfDestInterface"/>
+
+<owl:ObjectProperty rdf:about="#pfDestNetwork"/>
+
+<owl:ObjectProperty rdf:about="#pfFirstRule">
+  <rdfs:subPropertyOf rdf:resource="#containsRule"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#pfNextRule">
+  <rdfs:subPropertyOf rdf:resource="#beforePfRule"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#pfSourceInterface"/>
+
+<owl:ObjectProperty rdf:about="#pfSourceNetwork"/>
+
+<owl:ObjectProperty rdf:about="#portRange"/>
+
+<owl:ObjectProperty rdf:about="#runsOS">
+  <rdfs:domain rdf:resource="#Asset"/>
+  <rdfs:range rdf:resource="#OperatingSystem"/>
+  <rdfs:comment>e.g. a hardware device runs with an operting system</rdfs:comment>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#service">
+  <rdfs:domain rdf:resource="#ServiceList"/>
+  <rdfs:range rdf:resource="#Service"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#serviceList">
+  <rdfs:domain rdf:resource="#Asset"/>
+  <rdfs:range rdf:resource="#ServiceList"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#softwareInventory">
+  <rdfs:range rdf:resource="#SoftwareInventory"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#sourcePort">
+  <rdfs:domain rdf:resource="#AllowedFlow"/>
+  <rdfs:range rdf:resource="#PortRange"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#srcInterface"/>
+
+<owl:ObjectProperty rdf:about="#srcNetwork"/>
+
+<owl:ObjectProperty rdf:about="#subnet">
+  <rdfs:domain rdf:resource="#Network"/>
+  <rdfs:range rdf:resource="#Network"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#usesFlow"/>
+
+<owl:ObjectProperty rdf:about="#usesInterface">
+  <rdfs:domain rdf:resource="#Interface"/>
+  <rdfs:range rdf:resource="#Interface"/>
+</owl:ObjectProperty>
+
+<owl:DatatypeProperty rdf:about="#architecture"/>
+
+<owl:DatatypeProperty rdf:about="#cpe">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  <rdfs:comment xml:lang="en">stores the CPE of a hardware device, operating system or an application; e.g. cpe:2.3:a:microsoft:office:2016:-:-:-:-:mac_os_x bzw. cpe:/a:microsoft:office:2016::~~~mac_os_x~~</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#distribution"/>
+
+<owl:DatatypeProperty rdf:about="#hostname">
+  <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#identifier">
+  <rdfs:domain rdf:resource="#Asset"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  <rdfs:comment xml:lang="en">A unique identifier for a (Hardware/Software) device</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#ipV4Address">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#unsignedInt"/>
+  <rdfs:seeAlso rdf:resource="#prefixBits"/>
+  <rdfs:comment xml:lang="en">Saves the IPv4 address as an unsigned integer ( "10.0.0.1" -&gt; binary: 1010.0000 0000.0000 0000.0000 0001 -&gt; decimal: 167,772,161 ).</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#layer4Protocol"/>
+
+<owl:DatatypeProperty rdf:about="#macAddress"/>
+
+<owl:DatatypeProperty rdf:about="#machineIdentifier"/>
+
+<owl:DatatypeProperty rdf:about="#hasName"/>
+
+<owl:DatatypeProperty rdf:about="#networkType">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#pfAction">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#pfDestAddress"/>
+
+<owl:DatatypeProperty rdf:about="#pfDestinationPortDescription">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#pfDirection"/>
+
+<owl:DatatypeProperty rdf:about="#pfInterface">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#pfProtocol">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#pfQuick">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#pfSourceAddress"/>
+
+<owl:DatatypeProperty rdf:about="#pfSourcePortDescription">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#port"/>
+
+<owl:DatatypeProperty rdf:about="#portMax">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#unsignedInt"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#portMin">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#unsignedInt"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#prefixBits">
+  <rdfs:range>
+    <rdfs:Datatype>
+      <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#byte"/>
+      <owl:withRestrictions>
+        <rdf:Description>
+          <rdf:first>
+            <rdf:Description>
+              <xsd:minInclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#byte">0</xsd:minInclusive>
+            </rdf:Description>
+          </rdf:first>
+          <rdf:rest>
+            <rdf:Description>
+              <rdf:first>
+                <rdf:Description>
+                  <xsd:maxInclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#byte">32</xsd:maxInclusive>
+                </rdf:Description>
+              </rdf:first>
+              <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+            </rdf:Description>
+          </rdf:rest>
+        </rdf:Description>
+      </owl:withRestrictions>
+    </rdfs:Datatype>
+  </rdfs:range>
+  <rdfs:seeAlso rdf:resource="#ipV4Address"/>
+  <rdfs:seeAlso rdf:resource="#isInNetwork"/>
+  <rdfs:seeAlso rdf:resource="#parentNetwork"/>
+  <rdfs:comment xml:lang="en">Reveals the network/device part of an IPv4 address (range 0-32). Used in SWRL rules to determine parent networks etc.</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#version">
+  <rdfs:comment xml:lang="en">Holds the version of e.g. a software (usually as a string).</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/created"/>
+
+<owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/creator"/>
+
+<owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/description"/>
+
+<owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/license"/>
+
+<owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/title"/>
+
+<owl:AnnotationProperty rdf:about="http://purl.org/vocab/vann/preferredNamespaceUri"/>
+
+<owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/bibliographicCitation"/>
+
+<owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/contributor"/>
+
+<owl:AnnotationProperty rdf:about="http://purl.org/ontology/bibo/doi"/>
+
+<owl:AnnotationProperty rdf:about="http://purl.org/vocab/vann/preferredNamespacePrefix"/>
+
+<owl:AnnotationProperty rdf:about="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled"/>
+
+<owl:Class rdf:about="#AllowedFlow">
+  <rdfs:subClassOf rdf:resource="#Flow"/>
+</owl:Class>
+
+<owl:Class rdf:about="#AllowedIpV4Flow">
+  <rdfs:subClassOf rdf:resource="#AllowedFlow"/>
+</owl:Class>
+
+<owl:Class rdf:about="#AllowedTcpFlow">
+  <rdfs:subClassOf rdf:resource="#AllowedFlow"/>
+</owl:Class>
+
+<owl:Class rdf:about="#AllowedUdpFlow">
+  <rdfs:subClassOf rdf:resource="#AllowedFlow"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Asset">
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#interface"/>
+      <owl:someValuesFrom rdf:resource="#EthernetInterface"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#interface"/>
+      <owl:allValuesFrom rdf:resource="#Interface"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+</owl:Class>
+
+<owl:Class rdf:about="#Configuration"/>
+
+<owl:Class rdf:about="#DnsInterface">
+  <rdfs:subClassOf rdf:resource="#Interface"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#compatible"/>
+      <owl:allValuesFrom rdf:resource="#DnsInterface"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+</owl:Class>
+
+<owl:Class rdf:about="#DnsServer">
+  <rdfs:subClassOf rdf:resource="#ServiceSpecification"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#interface"/>
+      <owl:onClass rdf:resource="#DnsInterface"/>
+      <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+</owl:Class>
+
+<owl:Class rdf:about="#EthernetInterface">
+  <rdfs:subClassOf rdf:resource="#Interface"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#compatible"/>
+      <owl:allValuesFrom rdf:resource="#EthernetInterface"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#usesInterface"/>
+      <owl:onClass rdf:resource="#Interface"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+</owl:Class>
+
+<owl:Class rdf:about="#Firewall">
+  <rdfs:subClassOf rdf:resource="#HardwareDevice"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#interface"/>
+      <owl:onClass rdf:resource="#EthernetInterface"/>
+      <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">2</owl:minQualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#interface"/>
+      <owl:onClass rdf:resource="#IpV4Interface"/>
+      <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">2</owl:minQualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+</owl:Class>
+
+<owl:Class rdf:about="#Flow">
+  <rdfs:subClassOf rdf:resource="#Configuration"/>
+</owl:Class>
+
+<owl:Class rdf:about="#HardwareDevice">
+  <rdfs:subClassOf rdf:resource="#Asset"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#runsOS"/>
+      <owl:allValuesFrom rdf:resource="#OperatingSystem"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#softwareInventory"/>
+      <owl:allValuesFrom rdf:resource="#SoftwareInventory"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <owl:disjointWith rdf:resource="#SoftwareDevice"/>
+</owl:Class>
+
+<owl:Class rdf:about="#HttpInterface">
+  <rdfs:subClassOf rdf:resource="#Interface"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#compatible"/>
+      <owl:allValuesFrom rdf:resource="#HttpInterface"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+</owl:Class>
+
+<owl:Class rdf:about="#Interface">
+  <rdfs:subClassOf rdf:resource="#Configuration"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#usesInterface"/>
+      <owl:allValuesFrom rdf:resource="#Interface"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <owl:disjointUnionOf>
+    <rdf:Description>
+      <rdf:first rdf:resource="#EthernetInterface"/>
+      <rdf:rest>
+        <rdf:Description>
+          <rdf:first rdf:resource="#IpV4Interface"/>
+          <rdf:rest>
+            <rdf:Description>
+              <rdf:first rdf:resource="#TcpInterface"/>
+              <rdf:rest>
+                <rdf:Description>
+                  <rdf:first rdf:resource="#UdpInterface"/>
+                  <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                </rdf:Description>
+              </rdf:rest>
+            </rdf:Description>
+          </rdf:rest>
+        </rdf:Description>
+      </rdf:rest>
+    </rdf:Description>
+  </owl:disjointUnionOf>
+</owl:Class>
+
+<owl:Class rdf:about="#IpV4Interface">
+  <rdfs:subClassOf rdf:resource="#Interface"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#compatible"/>
+      <owl:allValuesFrom rdf:resource="#IpV4Interface"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#isInNetwork"/>
+      <owl:allValuesFrom rdf:resource="#Network"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+</owl:Class>
+
+<owl:Class rdf:about="#Network">
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#containsInterface"/>
+      <owl:someValuesFrom rdf:resource="#IpV4Interface"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#subnet"/>
+      <owl:allValuesFrom rdf:resource="#Network"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+</owl:Class>
+
+<owl:Class rdf:about="#NetworkZone">
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#assignedDmz"/>
+      <owl:allValuesFrom rdf:resource="#NetworkZone"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#containsNetwork"/>
+      <owl:allValuesFrom rdf:resource="#Network"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+</owl:Class>
+
+<owl:Class rdf:about="#OperatingSystem">
+  <rdfs:subClassOf rdf:resource="#Configuration"/>
+  <rdfs:comment xml:lang="en">The operating system of a device (Node). Relates to CPE's concerning operating systems and firmware.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#Pf">
+  <rdfs:subClassOf rdf:resource="#Configuration"/>
+</owl:Class>
+
+<owl:Class rdf:about="#PfConfiguration">
+  <rdfs:subClassOf rdf:resource="#Pf"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#pfFirstRule"/>
+      <owl:onClass rdf:resource="#PfRule"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+</owl:Class>
+
+<owl:Class rdf:about="#PfRule">
+  <rdfs:subClassOf rdf:resource="#Pf"/>
+</owl:Class>
+
+<owl:Class rdf:about="#PortRange">
+  <rdfs:subClassOf rdf:resource="#Configuration"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Router">
+  <rdfs:subClassOf rdf:resource="#HardwareDevice"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#interface"/>
+      <owl:onClass rdf:resource="#EthernetInterface"/>
+      <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">2</owl:minQualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#interface"/>
+      <owl:onClass rdf:resource="#IpV4Interface"/>
+      <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">2</owl:minQualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+</owl:Class>
+
+<owl:Class rdf:about="#RoutingDevice">
+  <rdfs:subClassOf rdf:resource="#ServiceSpecification"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#allowedFlow"/>
+      <owl:someValuesFrom rdf:resource="#AllowedFlow"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+</owl:Class>
+
+<owl:Class rdf:about="#Service">
+  <rdfs:subClassOf rdf:resource="#Configuration"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ServiceList">
+  <rdfs:subClassOf rdf:resource="#Configuration"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#service"/>
+      <owl:allValuesFrom rdf:resource="#Service"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+</owl:Class>
+
+<owl:Class rdf:about="#ServiceSpecification"/>
+
+<owl:Class rdf:about="#Software">
+  <rdfs:subClassOf rdf:resource="#Configuration"/>
+</owl:Class>
+
+<owl:Class rdf:about="#SoftwareDevice">
+  <rdfs:subClassOf rdf:resource="#Asset"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#softwareInventory"/>
+      <owl:allValuesFrom rdf:resource="#SoftwareInventory"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+</owl:Class>
+
+<owl:Class rdf:about="#SoftwareInventory">
+  <rdfs:subClassOf rdf:resource="#Configuration"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#installedSoftware"/>
+      <owl:allValuesFrom rdf:resource="#Software"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+</owl:Class>
+
+<owl:Class rdf:about="#Switch">
+  <rdfs:subClassOf rdf:resource="#HardwareDevice"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#interface"/>
+      <owl:onClass rdf:resource="#EthernetInterface"/>
+      <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">2</owl:minQualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+</owl:Class>
+
+<owl:Class rdf:about="#TcpInterface">
+  <rdfs:subClassOf rdf:resource="#Interface"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#compatible"/>
+      <owl:allValuesFrom rdf:resource="#TcpInterface"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#usesInterface"/>
+      <owl:onClass rdf:resource="#IpV4Interface"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+</owl:Class>
+
+<owl:Class rdf:about="#UdpInterface">
+  <rdfs:subClassOf rdf:resource="#Interface"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#compatible"/>
+      <owl:allValuesFrom rdf:resource="#UdpInterface"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#usesInterface"/>
+      <owl:onClass rdf:resource="#IpV4Interface"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+</owl:Class>
+
+<HardwareDevice rdf:about="#WORKSTATION1">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <interface rdf:resource="#02-D0-15-2B-9C-24EthernetInterface"/>
+  <interface rdf:resource="#02-D0-15-2B-9C-24IpV4Interface"/>
+  <interface rdf:resource="#00-00-00-00-00-00EthernetInterface"/>
+  <interface rdf:resource="#00-00-00-00-00-00IpV4Interface"/>
+  <runsOS rdf:resource="#Microsoft_Windows_7_Enterprise_"/>
+  <hostname rdf:datatype="http://www.w3.org/2001/XMLSchema#string">WORKSTATION1</hostname>
+  <machineIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00392-918-5000002-85769</machineIdentifier>
+</HardwareDevice>
+
+<OperatingSystem rdf:about="#Microsoft_Windows_7_Enterprise_">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <version rdf:datatype="http://www.w3.org/2001/XMLSchema#string">6.1.7601 Service Pack 1 Build 7601</version>
+</OperatingSystem>
+
+<EthernetInterface rdf:about="#02-D0-15-2B-9C-24EthernetInterface">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <macAddress rdf:datatype="http://www.w3.org/2001/XMLSchema#string">02-D0-15-2B-9C-24</macAddress>
+  <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Intel(R) PRO/1000 MT-Netzwerkverbindung</hasName>
+</EthernetInterface>
+
+<IpV4Interface rdf:about="#02-D0-15-2B-9C-24IpV4Interface">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <assignedToNetwork rdf:resource="#172_16_121_101_24"/>
+  <isInNetwork rdf:resource="#172_16_121_101_32"/>
+  <usesInterface rdf:resource="#02-D0-15-2B-9C-24EthernetInterface"/>
+  <ipV4Address rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2886760805</ipV4Address>
+  <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Intel(R) PRO/1000 MT-Netzwerkverbindung</hasName>
+  <prefixBits rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">24</prefixBits>
+</IpV4Interface>
+
+<Network rdf:about="#172_16_121_101_32">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <ipV4Address rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2886760805</ipV4Address>
+  <prefixBits rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">32</prefixBits>
+</Network>
+
+<Network rdf:about="#172_16_121_101_24">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <ipV4Address rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">11276409</ipV4Address>
+  <prefixBits rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">24</prefixBits>
+</Network>
+
+<EthernetInterface rdf:about="#00-00-00-00-00-00EthernetInterface">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <macAddress rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00-00-00-00-00-00</macAddress>
+  <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Microsoft-ISATAP-Adapter</hasName>
+</EthernetInterface>
+
+<IpV4Interface rdf:about="#00-00-00-00-00-00IpV4Interface">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <usesInterface rdf:resource="#00-00-00-00-00-00EthernetInterface"/>
+  <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Microsoft-ISATAP-Adapter</hasName>
+</IpV4Interface>
+
+<owl:AllDisjointClasses>
+  <owl:members rdf:parseType="Collection">
+    <rdf:Description rdf:about="#AllowedIpV4Flow"/>
+    <rdf:Description rdf:about="#AllowedTcpFlow"/>
+    <rdf:Description rdf:about="#AllowedUdpFlow"/>
+  </owl:members>
+</owl:AllDisjointClasses>
+
+
+</rdf:RDF>

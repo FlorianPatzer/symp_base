@@ -1,0 +1,206 @@
+mode: 'cli'
+owl_ontology_repository: '../../../'
+owl_input_ontology_file: '../../../system_base_ontology.owl'
+owl_output_ontology_file: 'output/generated-sql_server-ontology.owl'
+owl_output_ontology_file_type: 'rdfxml'
+owl_ontology_namespace: 'http://iosb.fraunhofer.de/ICS-Security#'
+owl_unique_identifier_type: 'object'
+owl_unique_identifier_object: 'machine'
+ontology_preprocessor: true
+ontology_postprocessor: true
+
+commands_from_file: true
+commands_file: '../command_outputs/commands_sql_server'
+
+commands:
+    -
+        command: 'uname -n'
+        object: 'machine'
+        owl_class: 'HardwareDevice'
+        owl_class_parent: 'Asset'
+        regex: '(.+)'
+        regex_rewind: true
+        objects:
+            -
+                object: 'hostname'
+                owl_dataProperty: 'hostname'
+                owl_dataProperty_parent: 'owl_topDataProperty'
+                owl_dataProperty_domain_object: 'machine'
+                regex: '(.+)'
+    -
+        command: 'cat /etc/machine-id' #Each command has to start with the command's invocation string
+        object: 'machine_identifier' #machine identifier currenty has to be derived from the first command's output
+        owl_dataProperty: 'machineIdentifier'
+        owl_dataProperty_parent: 'owl_topDataProperty'
+        owl_dataProperty_domain_object: 'machine'
+        regex: '([0-9a-f]{32})' #this output is taken as machine identifier
+    -
+        command: 'uname -r'
+        owl_class: 'OperatingSystem'
+        owl_class_parent: 'Configuration'
+        owl_objectProperty: 'runsOS'
+        object: 'operatingSystem'
+        regex: '(.+)'
+        regex_rewind: true
+        objects:
+            -
+                object: 'osVersion'
+                owl_dataProperty: 'version'
+                owl_dataProperty_parent: 'owl_topDataProperty'
+                owl_dataProperty_domain_object: 'operatingSystem'
+                regex: '(.+)'
+    -
+        command: 'cat /etc/os-release'
+        object: 'distributionName'
+        owl_dataProperty: 'distribution'
+        owl_dataProperty_parent: 'owl_topDataProperty'
+        owl_dataProperty_domain_object: 'operatingSystem'
+        regex: 'PRETTY_NAME="(.+?)"'
+#    -
+#        command: 'cat /etc/bind/named.conf.options'
+#        object: 'bind_config'
+#        objects:
+#            -
+#                object: 'udp_interface'
+#                owl_class: 'UdpInterface'
+#                owl_class_parent: 'Interface'
+#                owl_iri_suffix: 'UdpInterface'
+#                owl_postprocessing_functions:
+#                    - 'addDnsClass'
+#                regex: '^nis_pattern'   #Not in string pattern to force default value
+#                default_value: 'dnsUdpInterface'
+#                objects:
+#                    - object: 'port'
+#                      owl_dataProperty: 'port'
+#                      owl_dataProperty_parent: 'owl:topDataProperty'
+#                      owl_dataProperty_domain_object: 'udp_interface'
+#                      regex: 'listening-on [^\n]*?port ([0-9]+)\s'
+#                      default_value: 53
+    -
+        command: 'ifconfig'
+        object: 'network_interfaces'
+        iterate_subtree_mapping: true
+        objects:
+            -
+                object: 'ethernet_interface'
+                owl_class: 'EthernetInterface'
+                owl_class_parent: 'Interface'
+                owl_objectProperty: 'interface'
+                regex: '(\S+?): +flags'
+                owl_iri_suffix: 'EthernetInterface'
+                regex_rewind: true
+                objects:
+                    -
+                        object: 'name'
+                        owl_dataProperty: 'hasName'
+                        owl_dataProperty_parent: 'owl:topDataProperty'
+                        owl_dataProperty_domain_object: 'ethernet_interface'
+                        regex: '(\S+?):\s+flags'
+                    -
+                        object: 'mac'
+                        owl_dataProperty: 'macAddress'
+                        owl_dataProperty_parent: 'owl:topDataProperty'
+                        owl_dataProperty_domain_object: 'ethernet_interface'
+                        regex: 'ether (([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2}))'
+            -
+                object: 'ip_interface'
+                owl_class: 'IpV4Interface'
+                owl_class_parent: 'Interface'
+                owl_objectProperty: 'interface'
+                owl_iri_suffix: 'IpV4Interface'
+                regex: '(\S+?): +flags'
+                regex_rewind: true
+                owl_postprocessing_functions:
+                    - 'addIpV4Networks'
+                objects:
+                    -
+                        object: 'name'
+                        owl_dataProperty: 'hasName'
+                        owl_dataProperty_parent: 'owl:topDataProperty'
+                        owl_dataProperty_domain_object: 'ip_interface'
+                        regex: '(\S+?):\s+flags'
+                    -
+                        object: 'ip'
+                        owl_dataProperty: 'ipV4Address'
+                        owl_dataProperty_parent: 'owl:topDataProperty'
+                        owl_dataProperty_domain_object: 'ip_interface' #currently only predecessors of the same yml branch can be selected as domain_objects
+                        owl_preprocessing_function: 'ipV4ToInteger'
+                        regex: 'inet ([0-9]+?\.[0-9]+?\.[0-9]+?\.[0-9]+)'
+                    -
+                        object: 'netmask'
+                        owl_dataProperty: 'prefixBits'
+                        owl_dataProperty_parent: 'owl:topDataProperty'
+                        owl_dataProperty_domain_object: 'ip_interface'
+                        data_type: 'int'
+                        owl_preprocessing_function: 'ipV4NetmaskToInteger'
+                        regex: 'netmask ([0-9]+?\.[0-9]+?\.[0-9]+?\.[0-9]+)'
+    -
+        command: 'dpkg-query -l' #"dpkg-query -W -f='${Package}|${Architecture}|${Version}\n'"
+        object: 'software_inventory'
+        regex: '^nis_pattern'   #Not in string pattern to force default value
+        default_value: 'inventory'
+        owl_class: 'SoftwareInventory'
+        owl_class_parent: 'Configuration'
+        owl_objectProperty: 'softwareInventory'
+        iterate_subtree_mapping: true
+        objects:
+            -
+                object: 'software_package'
+                owl_class: 'Software'
+                owl_objectProperty: 'installedSoftware'
+                owl_objectProperty_domain_object: 'software_inventory'
+                owl_class_parent: 'Configuration'
+                regex: '\n(?:rc|ii) +(.*?) +'
+                regex_rewind: true
+                objects:
+                    -
+                        object: 'name'
+                        owl_dataProperty: 'hasName' #property created by preprocessor; actual property is called "name"
+                        owl_dataProperty_parent: 'owl:topDataProperty'
+                        owl_dataProperty_domain_object: 'software_package'
+                        regex: '\n(?:rc|ii) +(.*?)\s+'
+                    -
+                        object: 'version'
+                        owl_dataProperty: 'version'
+                        owl_dataProperty_parent: 'owl:topDataProperty'
+                        owl_dataProperty_domain_object: 'software_package'
+                        regex: '\s*(.*?)\s'
+                    -
+                        object: 'architecture'
+                        owl_dataProperty: 'architecture'
+                        owl_dataProperty_parent: 'owl:topDataProperty'
+                        owl_dataProperty_domain_object: 'software_package'
+                        regex: '\s*(.*?)\s'
+    -
+        command: 'cat /etc/services'
+        object: 'service_port_mapping'
+        iterate_subtree_mapping: true
+        objects:
+            -
+                object: 'mapping'
+                regex: '\n([0-9a-zA-Z\-]+)\s+'
+                regex_rewind: true
+                owl_class: 'Service'
+                owl_class_parent: 'Configuration'
+                owl_postprocessing_functions:
+                    - 'addToServiceList'
+                objects:
+                    -
+                        object: 'name'
+                        regex: '\n([0-9a-zA-Z\-]+)\s+'
+                        owl_dataProperty: 'hasName'
+                        owl_dataProperty_parent: 'owl:topDataProperty'
+                        owl_dataProperty_domain_object: 'mapping'
+                    -
+                        object: 'number'
+                        regex: '^\s*([0-9]+)/'
+                        owl_dataProperty: 'port'
+                        owl_dataProperty_parent: 'owl:topDataProperty'
+                        owl_dataProperty_domain_object: 'mapping'
+                        data_type: 'int'
+                    -
+                        object: 'protocol'
+                        regex: '^/([a-z]+)\s+'
+                        owl_dataProperty: 'layer4Protocol'
+                        owl_dataProperty_parent: 'owl:topDataProperty'
+                        owl_dataProperty_domain_object: 'mapping'

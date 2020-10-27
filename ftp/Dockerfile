@@ -47,7 +47,7 @@ RUN mkdir -p /home/vsftpd/
 RUN chown -R ftp:ftp /home/vsftpd/
 
 RUN mkdir -p /var/ftp/upload
-COPY /upload /var/ftp
+COPY /upload /var/ftp/upload
 
 RUN chown -R ftp:ftp /var/ftp/upload
 RUN chmod -R 777 /var/ftp/upload

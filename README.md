@@ -13,6 +13,8 @@ The following services are started:
 ### 1.2 Information about the containers
 
 #### VSFTP Server:
+    - PASSIVE mode doesn't work/is hard to configure in the k8s cluster, because of firewall issues
+    - Therefore only connections in ACTIVE mode are accepted
     - Anonymous connections are enabled 
     - Upload are allowed in the /upload directory 
     - Connection is SSL encrypted with a self signed certificate

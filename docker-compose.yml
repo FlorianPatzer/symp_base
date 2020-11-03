@@ -36,8 +36,6 @@ services:
             service1_net:
         volumes:
             - './mysql/config/conf.d/conf.cnf:/etc/mysql/conf.d/conf.cnf'
-        security_opt:
-            - seccomp:unconfined
                                   
 networks:
   service1_net:

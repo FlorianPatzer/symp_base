@@ -12,7 +12,7 @@ The following services are started:
 
 ### 1.2 Information about the containers
 
-#### VSFTP Server:
+#### VSFTPD Server:
     - PASSIVE mode doesn't work/is hard to configure in the k8s cluster, because of firewall issues
     - Therefore only connections in ACTIVE mode are accepted
     - Anonymous connections are enabled 

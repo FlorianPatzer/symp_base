@@ -102,7 +102,7 @@ docker_temp_server_start() {
 		mysql_note "Waiting for server startup"
 		local i
 		for i in {30..0}; do
-			# only use the root password if the database has already been initializaed
+			# only use the root password if the database has already been initialized
 			# so that it won't try to fill in a password file when it hasn't been set yet
 			extraArgs=()
 			if [ -z "$DATABASE_ALREADY_EXISTS" ]; then
@@ -286,8 +286,6 @@ docker_setup_db() {
 			mysql_note "Giving user ${MYSQL_USER} access to schema ${MYSQL_DATABASE}"
 			docker_process_sql --database=mysql <<<"GRANT ALL ON \`${MYSQL_DATABASE//_/\\_}\`.* TO '$MYSQL_USER'@'%' ;"
 		fi
-
-		docker_process_sql --database=mysql <<<"FLUSH PRIVILEGES ;"
 	fi
 }
 

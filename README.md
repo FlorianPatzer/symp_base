@@ -5,7 +5,7 @@ This repo automates the start of the SyMP framework within Docker
 The following services are started:
 - Camunda BPMN 
 - MySQL DB
-- Simple Read-Only FTP Server 
+- Simple FTP Server 
 
 ### 1.1 Prerequisites
 - Docker-compose

@@ -75,7 +75,9 @@ RUN addgroup -g 1000 -S camunda && \
 WORKDIR /camunda
 USER camunda
 
+USER root
 COPY /webapps/reasoningbpm-1.0.0.war /camunda/webapps/reasoningbpm-1.0.0.war
+RUN chmod +x /camunda/webapps/reasoningbpm-1.0.0.war
 
 ENTRYPOINT ["/sbin/tini", "--"]
 CMD ["./camunda.sh"]

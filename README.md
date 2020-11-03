@@ -13,8 +13,7 @@ The following services are started:
 ### 1.2 Information about the containers
 
 #### VSFTPD Server:
-    - PASSIVE mode doesn't work/is hard to configure in the k8s cluster, because of firewall issues
-    - Therefore only connections in ACTIVE mode are accepted
+    - Only connections in ACTIVE mode are accepted
     - Anonymous connections are enabled 
     - Upload are allowed in the /upload directory 
     - Connection is SSL encrypted with a self signed certificate
@@ -35,5 +34,12 @@ After cloning the repository, start a terminal in it's direcotry and execute:
 docker-compose up
 ```
 
+### 1.4 Remote Services
+- All of the services are running currently on the Fraunhofer k8s cluster and can be accessed only from within the cluster or from the Gitlab CI pipeline
+- The Camunda framework web inerface is accessible at https://symp-camunda.k8s.ilt-dmz.iosb.fraunhofer.de/camunda
+- Filezilla Client is hosted as a webservice at https://symp-filezilla.k8s.ilt-dmz.iosb.fraunhofer.de/ making it possible to see the content of the **/upload** folder of the FTP server
+
 ## 2. Known Issues
-The ftp container seams to not accept setfacl operations if docker storage driver "aufs" is configured. Since these operations are necessary to be performed on startup, the docker storage driver should be changed ("overlay2" has proven to be a good alternative).
+1. The ftp container seams to not accept setfacl operations if docker storage driver "aufs" is configured. Since these operations are necessary to be performed on startup, the docker storage driver should be changed ("overlay2" has proven to be a good alternative).
+
+2. PASSIVE mode doesn't work/is hard to configure in the k8s cluster, because of firewall issues. Therefore the server is set up to accept only connections in ACTIVE mode.

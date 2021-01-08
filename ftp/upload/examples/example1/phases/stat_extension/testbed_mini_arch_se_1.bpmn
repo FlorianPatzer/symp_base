@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1571x61" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.3.0">
+  <bpmn:process id="Process_1ycupw4" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" name="Start">
+      <bpmn:outgoing>SequenceFlow_0t6vlwu</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0t6vlwu" sourceRef="StartEvent_1" targetRef="ServiceTask_1hn5096" />
+    <bpmn:endEvent id="EndEvent_14ajdeg" name="Start">
+      <bpmn:incoming>SequenceFlow_1az9ay4</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="ServiceTask_0y9uzax" name="Add ICS Ontology" camunda:resultVariable="ontology1" camunda:type="external" camunda:topic="ontmapping">
+      <bpmn:extensionElements>
+        <camunda:properties>
+          <camunda:property id="fraunhofer-type" name="type" value="GENONT" />
+        </camunda:properties>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="Input_1pkbpjq">..\webapps\reasoning_bpm_war_exploded\tboxes\system_testbed1_iec62443_mapping.owl</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_1n6mss3</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1az9ay4</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="SequenceFlow_1az9ay4" sourceRef="ServiceTask_0y9uzax" targetRef="EndEvent_14ajdeg" />
+    <bpmn:serviceTask id="ServiceTask_1hn5096" name="Ontology Upload Task" camunda:resultVariable="ontology1" camunda:type="external" camunda:topic="ontupload">
+      <bpmn:extensionElements>
+        <camunda:properties>
+          <camunda:property id="fraunhofer-type" name="type" value="ONT" />
+        </camunda:properties>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="Input_1v1a9vg">..\webapps\reasoning_bpm_war_exploded\out_ServiceTask_0xx9o1j.owl</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_0t6vlwu</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1n6mss3</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="SequenceFlow_1n6mss3" sourceRef="ServiceTask_1hn5096" targetRef="ServiceTask_0y9uzax" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1ycupw4">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="152" y="99" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="158" y="142" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0t6vlwu_di" bpmnElement="SequenceFlow_0t6vlwu">
+        <di:waypoint x="188" y="117" />
+        <di:waypoint x="209" y="117" />
+        <di:waypoint x="209" y="77" />
+        <di:waypoint x="230" y="77" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_14ajdeg_di" bpmnElement="EndEvent_14ajdeg">
+        <dc:Bounds x="1112" y="99" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1118" y="142" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_0y9uzax_di" bpmnElement="ServiceTask_0y9uzax">
+        <dc:Bounds x="390" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1az9ay4_di" bpmnElement="SequenceFlow_1az9ay4">
+        <di:waypoint x="490" y="117" />
+        <di:waypoint x="1112" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_1hn5096_di" bpmnElement="ServiceTask_1hn5096">
+        <dc:Bounds x="230" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1n6mss3_di" bpmnElement="SequenceFlow_1n6mss3">
+        <di:waypoint x="330" y="117" />
+        <di:waypoint x="390" y="117" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

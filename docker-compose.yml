@@ -24,7 +24,7 @@ services:
             service1_net:
             
     mysql:
-        build: ./mysql   
+        image: mysql
         command: --default-authentication-plugin=mysql_native_password
         container_name: mysql
         environment:
@@ -34,7 +34,8 @@ services:
             - '3306:3306'
         networks:
             service1_net:
-                      
+        volumes:
+            - './mysql/config/conf.d/conf.cnf:/etc/mysql/conf.d/conf.cnf'
 networks:
   service1_net:
      

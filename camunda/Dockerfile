@@ -49,7 +49,7 @@ ENV WAIT_FOR=
 ENV WAIT_FOR_TIMEOUT=30
 ENV TZ=UTC
 ENV DEBUG=false
-ENV JAVA_OPTS="-Xmx768m -XX:MaxMetaspaceSize=256m"
+ENV JAVA_OPTS="-Xmx4g -XX:MaxMetaspaceSize=256m"
 ENV JMX_PROMETHEUS=false
 ENV JMX_PROMETHEUS_CONF=/camunda/javaagent/prometheus-jmx.yml
 ENV JMX_PROMETHEUS_PORT=9404
@@ -75,7 +75,9 @@ RUN addgroup -g 1000 -S camunda && \
 WORKDIR /camunda
 USER camunda
 
+USER root
 COPY /webapps/reasoningbpm-1.0.0.war /camunda/webapps/reasoningbpm-1.0.0.war
+RUN chmod +x /camunda/webapps/reasoningbpm-1.0.0.war
 
 ENTRYPOINT ["/sbin/tini", "--"]
 CMD ["./camunda.sh"]

@@ -1,0 +1,106 @@
+mode: 'cli'
+owl_ontology_repository: '../../../'
+owl_input_ontology_file: '../../../system_base_ontology.owl'
+owl_output_ontology_file: 'output/generated-cloudserver-ontology.owl'
+owl_output_ontology_file_type: 'rdfxml'
+owl_ontology_namespace: 'http://iosb.fraunhofer.de/ICS-Security#'
+owl_unique_identifier_type: "object"
+owl_unique_identifier_object: "machine"
+ontology_preprocessor: true
+ontology_postprocessor: true
+
+commands_from_file: true
+commands_file: '../command_outputs/commands_cloudserver'
+commands:
+    -
+        command: 'systeminfo'
+        object: 'machine'
+        owl_class: 'HardwareDevice'
+        owl_class_parent: 'Asset'
+        regex: 'Hostname: +(.+)'
+        regex_rewind: true
+        objects:
+            -
+                object: 'hostname'
+                owl_dataProperty: 'hostname'
+                owl_dataProperty_parent: 'owl_topDataProperty'
+                owl_dataProperty_domain_object: 'machine'
+                regex: 'Hostname: +(.+)'
+            -
+                owl_class: 'OperatingSystem'
+                owl_class_parent: 'Configuration'
+                owl_objectProperty: 'runsOS'
+                object: 'operatingSystem'
+                regex: 'Betriebssystemname: +(.+)'
+                regex_rewind: true
+                objects:
+                    -
+                        object: 'osVersion'
+                        owl_dataProperty: 'version'
+                        owl_dataProperty_parent: 'owl_topDataProperty'
+                        owl_dataProperty_domain_object: 'operatingSystem'
+                        regex: 'Betriebssystemversion: +(.+)'
+            -
+                object: 'product_identifier' #machine identifier currenty has to be derived from the first command's output
+                owl_dataProperty: 'machineIdentifier'
+                owl_dataProperty_parent: 'owl_topDataProperty'
+                owl_dataProperty_domain_object: 'machine'
+                regex: 'Produkt-ID: +(.+)' #this output is taken as machine identifier
+    -
+        command: 'ipconfig /all'
+        object: 'network_interfaces'
+        iterate_subtree_mapping: true
+        objects:
+            -
+                object: 'ethernet_interface'
+                owl_class: 'EthernetInterface'
+                owl_class_parent: 'Interface'
+                owl_objectProperty: 'interface'
+                regex: 'Beschreibung.*?\n\s*Physische Adresse.*?:\s*(([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2}))'
+                owl_iri_suffix: 'EthernetInterface'
+                regex_rewind: true
+                objects:
+                    -
+                        object: 'name'
+                        owl_dataProperty: 'hasName'
+                        owl_dataProperty_parent: 'owl:topDataProperty'
+                        owl_dataProperty_domain_object: 'ethernet_interface'
+                        regex: 'Beschreibung.*?:\s*(.+)'
+                    -
+                        object: 'mac'
+                        owl_dataProperty: 'macAddress'
+                        owl_dataProperty_parent: 'owl:topDataProperty'
+                        owl_dataProperty_domain_object: 'ethernet_interface'
+                        regex: 'Physische Adresse.*?:\s*(([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2}))'
+            -
+                object: 'ip_interface'
+                owl_class: 'IpV4Interface'
+                owl_class_parent: 'Interface'
+                owl_objectProperty: 'interface'
+                owl_iri_suffix: 'IpV4Interface'
+                regex: 'Beschreibung.*?\n\s*Physische Adresse.*?:\s*(([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2}))'
+                regex_rewind: true
+                owl_postprocessing_functions:
+                    - 'addIpV4NetworksIndividualName'
+                objects:
+                    -
+                        object: 'name'
+                        owl_dataProperty: 'hasName'
+                        owl_dataProperty_parent: 'owl:topDataProperty'
+                        owl_dataProperty_domain_object: 'ip_interface'
+                        regex: 'Beschreibung.*?:\s*(.+)'
+                    -
+                        object: 'ip'
+                        owl_dataProperty: 'ipV4Address'
+                        owl_dataProperty_parent: 'owl:topDataProperty'
+                        owl_dataProperty_domain_object: 'ip_interface' #currently only predecessors of the same yml branch can be selected as domain_objects
+                        owl_preprocessing_function: 'ipV4ToInteger'
+                        regex: 'IPv4-Adresse.*?:\s*([0-9]+?\.[0-9]+?\.[0-9]+?\.[0-9]+)'
+                    -
+                        object: 'netmask'
+                        owl_dataProperty: 'prefixBits'
+                        owl_dataProperty_parent: 'owl:topDataProperty'
+                        owl_dataProperty_domain_object: 'ip_interface'
+                        data_type: 'int'
+                        owl_preprocessing_function: 'ipV4NetmaskToInteger'
+                        regex: 'Subnetzmaske.*?:\s*([0-9]+?\.[0-9]+?\.[0-9]+?\.[0-9]+)'

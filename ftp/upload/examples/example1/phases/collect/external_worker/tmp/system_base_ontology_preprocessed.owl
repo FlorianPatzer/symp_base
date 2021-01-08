@@ -1,0 +1,987 @@
+<Ontology xmlns="http://www.w3.org/2002/07/owl#" ontologyIRI="http://iosb.fraunhofer.de/ICS-Security" xml:base="http://iosb.fraunhofer.de/ICS-Security">
+    <Prefix IRI="http://iosb.fraunhofer.de/ICS-Security" name="" />
+    <Prefix IRI="http://www.w3.org/2002/07/owl#" name="owl" />
+    <Prefix IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#" name="rdf" />
+    <Prefix IRI="http://www.w3.org/XML/1998/namespace" name="xml" />
+    <Prefix IRI="http://www.w3.org/2001/XMLSchema#" name="xsd" />
+    <Prefix IRI="http://www.w3.org/2000/01/rdf-schema#" name="rdfs" />
+    <Prefix IRI="http://www.w3.org/2003/11/swrl#" name="swrl" />
+    <Prefix IRI="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#" name="swrla" />
+    <Prefix IRI="http://www.w3.org/2003/11/swrlb#" name="swrlb" />
+    <Prefix IRI="http://iosb.fraunhofer.de/ICS-Security#" name="ICS-Security" />
+    <Annotation>
+        <AnnotationProperty IRI="http://purl.org/dc/terms/bibliographicCitation" />
+        <Literal xml:lang="en">we can't make this field disappear</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty IRI="http://purl.org/dc/terms/contributor" />
+        <Literal>Louisa Lambrecht,
+Florian Patzer</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty IRI="http://purl.org/dc/terms/created" />
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#dateTime">2019-01-28T00:00:00</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty IRI="http://purl.org/dc/terms/creator" />
+        <Literal>David Kahles</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty IRI="http://purl.org/dc/terms/description" />
+        <Literal xml:lang="en">The ICS Security Ontology represents hardware and software objects, configurations of those and their relationships within networks.</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty IRI="http://purl.org/dc/terms/license" />
+        <Literal>license should go here</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty IRI="http://purl.org/dc/terms/title" />
+        <Literal xml:lang="en">ICS Security Ontology</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty IRI="http://purl.org/vocab/vann/preferredNamespaceUri" />
+        <Literal>http://iosb.fraunhofer.de/ICS-Security#</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="owl:versionInfo" />
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">1.0</Literal>
+    </Annotation>
+    <Declaration>
+        <Class IRI="#AllowedFlow" />
+    </Declaration>
+    <Declaration>
+        <Class IRI="#AllowedIpV4Flow" />
+    </Declaration>
+    <Declaration>
+        <Class IRI="#AllowedTcpFlow" />
+    </Declaration>
+    <Declaration>
+        <Class IRI="#AllowedUdpFlow" />
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Asset" />
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Configuration" />
+    </Declaration>
+    <Declaration>
+        <Class IRI="#DnsInterface" />
+    </Declaration>
+    <Declaration>
+        <Class IRI="#DnsServer" />
+    </Declaration>
+    <Declaration>
+        <Class IRI="#EthernetInterface" />
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Firewall" />
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Flow" />
+    </Declaration>
+    <Declaration>
+        <Class IRI="#HardwareDevice" />
+    </Declaration>
+    <Declaration>
+        <Class IRI="#HttpInterface" />
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Interface" />
+    </Declaration>
+    <Declaration>
+        <Class IRI="#IpV4Interface" />
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Network" />
+    </Declaration>
+    <Declaration>
+        <Class IRI="#NetworkZone" />
+    </Declaration>
+    <Declaration>
+        <Class IRI="#OperatingSystem" />
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Pf" />
+    </Declaration>
+    <Declaration>
+        <Class IRI="#PfConfiguration" />
+    </Declaration>
+    <Declaration>
+        <Class IRI="#PfRule" />
+    </Declaration>
+    <Declaration>
+        <Class IRI="#PortRange" />
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Router" />
+    </Declaration>
+    <Declaration>
+        <Class IRI="#RoutingDevice" />
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Service" />
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ServiceList" />
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ServiceSpecification" />
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Software" />
+    </Declaration>
+    <Declaration>
+        <Class IRI="#SoftwareDevice" />
+    </Declaration>
+    <Declaration>
+        <Class IRI="#SoftwareInventory" />
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Switch" />
+    </Declaration>
+    <Declaration>
+        <Class IRI="#TcpInterface" />
+    </Declaration>
+    <Declaration>
+        <Class IRI="#UdpInterface" />
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#allowedFlow" />
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#assignedDmz" />
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#assignedToNetwork" />
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#beforePfRule" />
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#communicates" />
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#compatible" />
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#connected" />
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#connectedIgnoredDestinationPort" />
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#connectedIgnoredSourcePort" />
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#containsInterface" />
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#containsNetwork" />
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#containsRule" />
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#destinationPort" />
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#directNeighborOf" />
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#dstInterface" />
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#dstNetwork" />
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#firewallConfig" />
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#firewallRule" />
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#inputInterface" />
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#installedSoftware" />
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#interface" />
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isInNetwork" />
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#parentNetwork" />
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#pfDestInterface" />
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#pfDestNetwork" />
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#pfFirstRule" />
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#pfNextRule" />
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#pfSourceInterface" />
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#pfSourceNetwork" />
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#portRange" />
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#runsOS" />
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#service" />
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#serviceList" />
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#softwareInventory" />
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#sourcePort" />
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#srcInterface" />
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#srcNetwork" />
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#subnet" />
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#usesFlow" />
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#usesInterface" />
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#architecture" />
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#cpe" />
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#distribution" />
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hostname" />
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#identifier" />
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#ipV4Address" />
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#layer4Protocol" />
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#macAddress" />
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#machineIdentifier" />
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasName" />
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#networkType" />
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#pfAction" />
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#pfDestAddress" />
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#pfDestinationPortDescription" />
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#pfDirection" />
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#pfInterface" />
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#pfProtocol" />
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#pfQuick" />
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#pfSourceAddress" />
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#pfSourcePortDescription" />
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#port" />
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#portMax" />
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#portMin" />
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#prefixBits" />
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#version" />
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty IRI="http://purl.org/dc/terms/bibliographicCitation" />
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty IRI="http://purl.org/dc/terms/contributor" />
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty IRI="http://purl.org/dc/terms/created" />
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty IRI="http://purl.org/dc/terms/creator" />
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty IRI="http://purl.org/dc/terms/description" />
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty IRI="http://purl.org/dc/terms/license" />
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty IRI="http://purl.org/dc/terms/title" />
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty IRI="http://purl.org/ontology/bibo/doi" />
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty IRI="http://purl.org/vocab/vann/preferredNamespacePrefix" />
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty IRI="http://purl.org/vocab/vann/preferredNamespaceUri" />
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="swrla:isRuleEnabled" />
+    </Declaration>
+    <SubClassOf>
+        <Class IRI="#AllowedFlow" />
+        <Class IRI="#Flow" />
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#AllowedIpV4Flow" />
+        <Class IRI="#AllowedFlow" />
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#AllowedTcpFlow" />
+        <Class IRI="#AllowedFlow" />
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#AllowedUdpFlow" />
+        <Class IRI="#AllowedFlow" />
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Asset" />
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#interface" />
+            <Class IRI="#EthernetInterface" />
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Asset" />
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="#interface" />
+            <Class IRI="#Interface" />
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#DnsInterface" />
+        <Class IRI="#Interface" />
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#DnsInterface" />
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="#compatible" />
+            <Class IRI="#DnsInterface" />
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#DnsServer" />
+        <Class IRI="#ServiceSpecification" />
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#DnsServer" />
+        <ObjectMinCardinality cardinality="1">
+            <ObjectProperty IRI="#interface" />
+            <Class IRI="#DnsInterface" />
+        </ObjectMinCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#EthernetInterface" />
+        <Class IRI="#Interface" />
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#EthernetInterface" />
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="#compatible" />
+            <Class IRI="#EthernetInterface" />
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#EthernetInterface" />
+        <ObjectExactCardinality cardinality="0">
+            <ObjectProperty IRI="#usesInterface" />
+            <Class IRI="#Interface" />
+        </ObjectExactCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Firewall" />
+        <Class IRI="#HardwareDevice" />
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Firewall" />
+        <ObjectMinCardinality cardinality="2">
+            <ObjectProperty IRI="#interface" />
+            <Class IRI="#EthernetInterface" />
+        </ObjectMinCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Firewall" />
+        <ObjectMinCardinality cardinality="2">
+            <ObjectProperty IRI="#interface" />
+            <Class IRI="#IpV4Interface" />
+        </ObjectMinCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Flow" />
+        <Class IRI="#Configuration" />
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#HardwareDevice" />
+        <Class IRI="#Asset" />
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#HardwareDevice" />
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="#runsOS" />
+            <Class IRI="#OperatingSystem" />
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#HardwareDevice" />
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="#softwareInventory" />
+            <Class IRI="#SoftwareInventory" />
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#HttpInterface" />
+        <Class IRI="#Interface" />
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#HttpInterface" />
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="#compatible" />
+            <Class IRI="#HttpInterface" />
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Interface" />
+        <Class IRI="#Configuration" />
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Interface" />
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="#usesInterface" />
+            <Class IRI="#Interface" />
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#IpV4Interface" />
+        <Class IRI="#Interface" />
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#IpV4Interface" />
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="#compatible" />
+            <Class IRI="#IpV4Interface" />
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#IpV4Interface" />
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="#isInNetwork" />
+            <Class IRI="#Network" />
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Network" />
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#containsInterface" />
+            <Class IRI="#IpV4Interface" />
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Network" />
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="#subnet" />
+            <Class IRI="#Network" />
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#NetworkZone" />
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="#assignedDmz" />
+            <Class IRI="#NetworkZone" />
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#NetworkZone" />
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="#containsNetwork" />
+            <Class IRI="#Network" />
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#OperatingSystem" />
+        <Class IRI="#Configuration" />
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Pf" />
+        <Class IRI="#Configuration" />
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#PfConfiguration" />
+        <Class IRI="#Pf" />
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#PfConfiguration" />
+        <ObjectExactCardinality cardinality="1">
+            <ObjectProperty IRI="#pfFirstRule" />
+            <Class IRI="#PfRule" />
+        </ObjectExactCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#PfRule" />
+        <Class IRI="#Pf" />
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#PortRange" />
+        <Class IRI="#Configuration" />
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Router" />
+        <Class IRI="#HardwareDevice" />
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Router" />
+        <ObjectMinCardinality cardinality="2">
+            <ObjectProperty IRI="#interface" />
+            <Class IRI="#EthernetInterface" />
+        </ObjectMinCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Router" />
+        <ObjectMinCardinality cardinality="2">
+            <ObjectProperty IRI="#interface" />
+            <Class IRI="#IpV4Interface" />
+        </ObjectMinCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#RoutingDevice" />
+        <Class IRI="#ServiceSpecification" />
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#RoutingDevice" />
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#allowedFlow" />
+            <Class IRI="#AllowedFlow" />
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Service" />
+        <Class IRI="#Configuration" />
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ServiceList" />
+        <Class IRI="#Configuration" />
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ServiceList" />
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="#service" />
+            <Class IRI="#Service" />
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Software" />
+        <Class IRI="#Configuration" />
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#SoftwareDevice" />
+        <Class IRI="#Asset" />
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#SoftwareDevice" />
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="#softwareInventory" />
+            <Class IRI="#SoftwareInventory" />
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#SoftwareInventory" />
+        <Class IRI="#Configuration" />
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#SoftwareInventory" />
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="#installedSoftware" />
+            <Class IRI="#Software" />
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Switch" />
+        <Class IRI="#HardwareDevice" />
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Switch" />
+        <ObjectMinCardinality cardinality="2">
+            <ObjectProperty IRI="#interface" />
+            <Class IRI="#EthernetInterface" />
+        </ObjectMinCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#TcpInterface" />
+        <Class IRI="#Interface" />
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#TcpInterface" />
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="#compatible" />
+            <Class IRI="#TcpInterface" />
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#TcpInterface" />
+        <ObjectExactCardinality cardinality="1">
+            <ObjectProperty IRI="#usesInterface" />
+            <Class IRI="#IpV4Interface" />
+        </ObjectExactCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#UdpInterface" />
+        <Class IRI="#Interface" />
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#UdpInterface" />
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="#compatible" />
+            <Class IRI="#UdpInterface" />
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#UdpInterface" />
+        <ObjectExactCardinality cardinality="1">
+            <ObjectProperty IRI="#usesInterface" />
+            <Class IRI="#IpV4Interface" />
+        </ObjectExactCardinality>
+    </SubClassOf>
+    <DisjointClasses>
+        <Class IRI="#AllowedIpV4Flow" />
+        <Class IRI="#AllowedTcpFlow" />
+        <Class IRI="#AllowedUdpFlow" />
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#HardwareDevice" />
+        <Class IRI="#SoftwareDevice" />
+    </DisjointClasses>
+    <DisjointUnion>
+        <Class IRI="#Interface" />
+        <Class IRI="#EthernetInterface" />
+        <Class IRI="#IpV4Interface" />
+        <Class IRI="#TcpInterface" />
+        <Class IRI="#UdpInterface" />
+    </DisjointUnion>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#assignedToNetwork" />
+        <ObjectProperty IRI="#isInNetwork" />
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#communicates" />
+        <ObjectProperty IRI="#connected" />
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#connected" />
+        <ObjectProperty IRI="#compatible" />
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#connectedIgnoredDestinationPort" />
+        <ObjectProperty IRI="#compatible" />
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#connectedIgnoredSourcePort" />
+        <ObjectProperty IRI="#compatible" />
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#firewallRule" />
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty" />
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#pfFirstRule" />
+        <ObjectProperty IRI="#containsRule" />
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#pfNextRule" />
+        <ObjectProperty IRI="#beforePfRule" />
+    </SubObjectPropertyOf>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#containsInterface" />
+        <ObjectProperty IRI="#isInNetwork" />
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#parentNetwork" />
+        <ObjectProperty IRI="#subnet" />
+    </InverseObjectProperties>
+    <SymmetricObjectProperty>
+        <ObjectProperty IRI="#compatible" />
+    </SymmetricObjectProperty>
+    <SymmetricObjectProperty>
+        <ObjectProperty IRI="#directNeighborOf" />
+    </SymmetricObjectProperty>
+    <TransitiveObjectProperty>
+        <ObjectProperty IRI="#beforePfRule" />
+    </TransitiveObjectProperty>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#assignedToNetwork" />
+        <Class IRI="#Interface" />
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#containsInterface" />
+        <Class IRI="#Network" />
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#destinationPort" />
+        <Class IRI="#AllowedFlow" />
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#interface" />
+        <Class IRI="#Asset" />
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#isInNetwork" />
+        <Class IRI="#Interface" />
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#runsOS" />
+        <Class IRI="#Asset" />
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#service" />
+        <Class IRI="#ServiceList" />
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#serviceList" />
+        <Class IRI="#Asset" />
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#sourcePort" />
+        <Class IRI="#AllowedFlow" />
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#subnet" />
+        <Class IRI="#Network" />
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#usesInterface" />
+        <Class IRI="#Interface" />
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#allowedFlow" />
+        <Class IRI="#AllowedFlow" />
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#assignedToNetwork" />
+        <Class IRI="#Network" />
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#containsInterface" />
+        <Class IRI="#Interface" />
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#destinationPort" />
+        <Class IRI="#PortRange" />
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#interface" />
+        <Class IRI="#Interface" />
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#isInNetwork" />
+        <Class IRI="#Network" />
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#runsOS" />
+        <Class IRI="#OperatingSystem" />
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#service" />
+        <Class IRI="#Service" />
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#serviceList" />
+        <Class IRI="#ServiceList" />
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#softwareInventory" />
+        <Class IRI="#SoftwareInventory" />
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#sourcePort" />
+        <Class IRI="#PortRange" />
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#subnet" />
+        <Class IRI="#Network" />
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#usesInterface" />
+        <Class IRI="#Interface" />
+    </ObjectPropertyRange>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#hostname" />
+        <DataProperty abbreviatedIRI="owl:topDataProperty" />
+    </SubDataPropertyOf>
+    <DataPropertyDomain>
+        <DataProperty IRI="#identifier" />
+        <Class IRI="#Asset" />
+    </DataPropertyDomain>
+    <DataPropertyRange>
+        <DataProperty IRI="#cpe" />
+        <Datatype abbreviatedIRI="xsd:string" />
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#identifier" />
+        <Datatype abbreviatedIRI="xsd:string" />
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#ipV4Address" />
+        <Datatype abbreviatedIRI="xsd:unsignedInt" />
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#networkType" />
+        <Datatype abbreviatedIRI="xsd:string" />
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#pfAction" />
+        <Datatype abbreviatedIRI="xsd:string" />
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#pfDestinationPortDescription" />
+        <Datatype abbreviatedIRI="xsd:string" />
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#pfInterface" />
+        <Datatype abbreviatedIRI="xsd:string" />
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#pfProtocol" />
+        <Datatype abbreviatedIRI="xsd:string" />
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#pfQuick" />
+        <Datatype abbreviatedIRI="xsd:boolean" />
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#pfSourcePortDescription" />
+        <Datatype abbreviatedIRI="xsd:string" />
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#portMax" />
+        <Datatype abbreviatedIRI="xsd:unsignedInt" />
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#portMin" />
+        <Datatype abbreviatedIRI="xsd:unsignedInt" />
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#prefixBits" />
+        <DatatypeRestriction>
+            <Datatype abbreviatedIRI="xsd:byte" />
+            <FacetRestriction facet="http://www.w3.org/2001/XMLSchema#minInclusive">
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#byte">0</Literal>
+            </FacetRestriction>
+            <FacetRestriction facet="http://www.w3.org/2001/XMLSchema#maxInclusive">
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#byte">32</Literal>
+            </FacetRestriction>
+        </DatatypeRestriction>
+    </DataPropertyRange>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment" />
+        <IRI>#OperatingSystem</IRI>
+        <Literal xml:lang="en">The operating system of a device (Node). Relates to CPE's concerning operating systems and firmware.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment" />
+        <IRI>#cpe</IRI>
+        <Literal xml:lang="en">stores the CPE of a hardware device, operating system or an application; e.g. cpe:2.3:a:microsoft:office:2016:-:-:-:-:mac_os_x bzw. cpe:/a:microsoft:office:2016::~~~mac_os_x~~</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment" />
+        <IRI>#identifier</IRI>
+        <Literal xml:lang="en">A unique identifier for a (Hardware/Software) device</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment" />
+        <IRI>#installedSoftware</IRI>
+        <Literal xml:lang="en">A software inventory contains all installed software on a device.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment" />
+        <IRI>#ipV4Address</IRI>
+        <Literal xml:lang="en">Saves the IPv4 address as an unsigned integer ( "10.0.0.1" -&gt; binary: 1010.0000 0000.0000 0000.0000 0001 -&gt; decimal: 167,772,161 ).</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:seeAlso" />
+        <IRI>#ipV4Address</IRI>
+        <IRI>#prefixBits</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment" />
+        <IRI>#prefixBits</IRI>
+        <Literal xml:lang="en">Reveals the network/device part of an IPv4 address (range 0-32). Used in SWRL rules to determine parent networks etc.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:seeAlso" />
+        <IRI>#prefixBits</IRI>
+        <IRI>#ipV4Address</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:seeAlso" />
+        <IRI>#prefixBits</IRI>
+        <IRI>#isInNetwork</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:seeAlso" />
+        <IRI>#prefixBits</IRI>
+        <IRI>#parentNetwork</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment" />
+        <IRI>#runsOS</IRI>
+        <Literal>e.g. a hardware device runs with an operting system</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment" />
+        <IRI>#version</IRI>
+        <Literal xml:lang="en">Holds the version of e.g. a software (usually as a string).</Literal>
+    </AnnotationAssertion>
+</Ontology>

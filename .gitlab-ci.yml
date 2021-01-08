@@ -1,12 +1,8 @@
 include:
   - remote: https://ci-templates.k8s.ilt-dmz.iosb.fraunhofer.de/templates/gitlab-ci-common.yml
-  - remote: https://ci-templates.k8s.ilt-dmz.iosb.fraunhofer.de/templates/gitlab-ci-k8s-deploy.yml
-  - remote: https://ci-templates.docker01.ilt-dmz.iosb.fraunhofer.de/templates/default/gitlab-ci-k8s-deploy-prod.yml
 
 variables:
   DOCKER_HOST: tcp://localhost:2375
-  K8S_NAMESPACE: symp
-  K8S_KUSTOMIZE_PATH: templates/k8s/overlays/rancher
 
 image: docker
 
@@ -45,31 +41,16 @@ mysql-branch:
   extends:
     - .docker-build-branch
 
-camunda:
-  stage: build
-  before_script:
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
-  script:
-    - docker pull camunda/camunda-bpm-platform
-    - docker tag camunda/camunda-bpm-platform gitlab-ext.iosb.fraunhofer.de:4567/symp/symp-docker/camunda
-    - docker push gitlab-ext.iosb.fraunhofer.de:4567/symp/symp-docker/camunda
+camunda-master:
+  variables:
+    DOCKER_FILE_PATH: ./camunda/
+    DOCKER_IMAGE_SUBPROJECT: /camunda
+  extends:
+    - .docker-build-master
 
-filezilla-web-client:
-  stage: build
-  before_script:
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
-  script:
-    - docker pull jlesage/filezilla
-    - docker tag jlesage/filezilla gitlab-ext.iosb.fraunhofer.de:4567/symp/symp-docker/filezilla-client
-    - docker push gitlab-ext.iosb.fraunhofer.de:4567/symp/symp-docker/filezilla-client
-
-test:
-  stage: test
-  image:
-    name: bitnami/kubectl
-  before_script:
-    - echo ${CI_PROJECT_NAME}
-    - echo ${CI_REGISTRY_IMAGE}
-    - echo ${DOCKER_IMAGE_NAME}
-  script:
-    - kubectl
+camunda-branch:
+  variables:
+    DOCKER_FILE_PATH: ./camunda/
+    DOCKER_IMAGE_SUBPROJECT: /camunda
+  extends:
+    - .docker-build-branch

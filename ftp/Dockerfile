@@ -23,7 +23,7 @@ ENV FTP_USER **String**
 ENV FTP_PASS **Random**
 ENV PASV_ADDRESS **IPv4**
 ENV PASV_ADDR_RESOLVE NO
-ENV PASV_ENABLE YES
+ENV PASV_ENABLE NO
 ENV PASV_MIN_PORT 21100
 ENV PASV_MAX_PORT 21110
 ENV XFERLOG_STD_FORMAT NO
@@ -47,7 +47,7 @@ RUN mkdir -p /home/vsftpd/
 RUN chown -R ftp:ftp /home/vsftpd/
 
 RUN mkdir -p /var/ftp/upload
-COPY /examples /var/ftp/upload
+COPY /upload /var/ftp/upload
 
 RUN chown -R ftp:ftp /var/ftp/upload
 RUN chmod -R 777 /var/ftp/upload

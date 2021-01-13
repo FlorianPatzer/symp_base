@@ -21,9 +21,8 @@ RUN groupmod -g ${GROUP_ID} ftp
 
 ENV FTP_USER **String**
 ENV FTP_PASS **Random**
-ENV PASV_ADDRESS **IPv4**
 ENV PASV_ADDR_RESOLVE NO
-ENV PASV_ENABLE NO
+ENV PASV_ENABLE YES
 ENV PASV_MIN_PORT 21100
 ENV PASV_MAX_PORT 21110
 ENV XFERLOG_STD_FORMAT NO
@@ -56,6 +55,6 @@ RUN chmod g+s /var/ftp/upload
 VOLUME /home/vsftpd
 VOLUME /var/log/vsftpd
 
-EXPOSE 20 21
+EXPOSE 20-22 21100-21110
 
 CMD ["/usr/sbin/run-vsftpd.sh"]

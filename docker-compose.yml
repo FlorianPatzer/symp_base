@@ -3,25 +3,21 @@ services:
     ftp:
         build: ./ftp
         ports:
-            - 20-21:20-21
-            - 21100-21110:21100-21110
-            - 990:990
+            - "20-22:20-22"
+            - "21100-21110:21100-21110"
         container_name: ftp
         environment:
+            PUBLICHOST: "localhost"
             FTP_USER: admin
             FTP_PASS: admin
         restart: always
-        networks:
-            service1_net:
         
-    camunda-bpm-platform:
+    camunda:
         build: ./camunda
         container_name: camunda
         restart: always
         ports:
             - '8080:8080'
-        networks:
-            service1_net:
             
     mysql:
         image: mysql
@@ -32,11 +28,8 @@ services:
             MYSQL_DATABASE: security_analysis_repository
         ports:
             - '3306:3306'
-        networks:
-            service1_net:
         volumes:
             - './mysql/config/conf.d/conf.cnf:/etc/mysql/conf.d/conf.cnf'
                                   
-networks:
-  service1_net:
+
      

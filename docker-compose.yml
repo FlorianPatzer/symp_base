@@ -30,11 +30,12 @@ services:
             - '3306:3306'
         volumes:
             - './mysql/config/conf.d/conf.cnf:/etc/mysql/conf.d/conf.cnf'
-<<<<<<< HEAD
-                                  
-
-=======
-networks:
-  service1_net:
->>>>>>> c63de7bf3344f4141ff5a09f815569626d9d4663
-     
+  
+    filezilla:
+        container_name: filezilla
+        ports:
+            - '5800:5800'
+        volumes:
+            - '/docker/appdata/filezilla:/config:rw'
+            - '$HOME:/storage:rw'
+        image: jlesage/filezilla

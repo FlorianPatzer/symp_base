@@ -13,12 +13,12 @@ The following services are started:
 
 ### 1.2 Information about the containers
 
-| Service      | Address                    | Docker Network  |
-|:-------------|:---------------------------|:----------------|
-| MYSQL        | localhost:3306             | mysql:3306      |
-| Camunda REST | localhost:8080/engine-rest | camunda:8080    |
-| VSFTPD       | localhost:21               | ftp:21          |
-
+| Service             | Address                    | Docker Network  |
+|:--------------------|:---------------------------|:----------------|
+| MYSQL               | localhost:3306             | mysql:3306      |
+| Camunda REST        | localhost:8080/engine-rest | camunda:8080    |
+| VSFTPD              | localhost:21               | ftp:21          |
+| Filezilla Web Client| localhost:5800             | filezilla:5800  |
 
 #### VSFTPD Server:
     - Anonymous connections are enabled 

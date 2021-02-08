@@ -5,15 +5,22 @@ This repo automates the start of the SyMP framework within Docker
 The following services are started:
 - Camunda BPMN 
 - MySQL DB
-- Simple FTP Server 
+- VSFTPD Server
+- Filezilla Web Client 
 
 ### 1.1 Prerequisites
 - Docker-compose
 
 ### 1.2 Information about the containers
 
+| Service             | Address                    | Docker Network  |
+|:--------------------|:---------------------------|:----------------|
+| MYSQL               | localhost:3306             | mysql:3306      |
+| Camunda REST        | localhost:8080/engine-rest | camunda:8080    |
+| VSFTPD              | localhost:21               | ftp:21          |
+| Filezilla Web Client| localhost:5800             | filezilla:5800  |
+
 #### VSFTPD Server:
-    - Only connections in ACTIVE mode are accepted
     - Anonymous connections are enabled 
     - Upload are allowed in the /upload directory 
     - Connection is SSL encrypted with a self signed certificate
@@ -23,7 +30,6 @@ The following services are started:
     - Each webapp needs a "COPY" entry in the Dockerfile of camunda
 
 #### MySQL:
-    - Runs on port 3306
     - Default password: 0b53c4f 
 
 ### 1.3 Running the application
@@ -41,5 +47,3 @@ docker-compose up
 
 ## 2. Known Issues
 1. The ftp container seams to not accept setfacl operations if docker storage driver "aufs" is configured. Since these operations are necessary to be performed on startup, the docker storage driver should be changed ("overlay2" has proven to be a good alternative).
-
-2. PASSIVE mode doesn't work/is hard to configure in the k8s cluster, because of firewall issues. Therefore the server is set up to accept only connections in ACTIVE mode.

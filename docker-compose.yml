@@ -3,7 +3,7 @@ services:
     ftp:
         build: ./ftp
         ports:
-            - "20-22:20-22"
+            - "20-21:20-21"
             - "21100-21110:21100-21110"
         container_name: ftp
         environment:

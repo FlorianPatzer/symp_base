@@ -11,6 +11,8 @@ services:
             FTP_USER: admin
             FTP_PASS: admin
         restart: always
+        networks:
+            - symp
         
     camunda:
         build: ./camunda
@@ -18,6 +20,8 @@ services:
         restart: always
         ports:
             - '8080:8080'
+        networks:
+            - symp
             
     mysql:
         image: mysql
@@ -30,6 +34,8 @@ services:
             - '3306:3306'
         volumes:
             - './mysql/config/conf.d/conf.cnf:/etc/mysql/conf.d/conf.cnf'
+        networks:
+            - symp
   
     filezilla:
         container_name: filezilla
@@ -39,3 +45,7 @@ services:
             - '/docker/appdata/filezilla:/config:rw'
             - '$HOME:/storage:rw'
         image: jlesage/filezilla
+        networks:
+            - symp
+networks:
+    symp:

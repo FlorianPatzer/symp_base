@@ -1,4 +1,4 @@
-version: '3.3'
+version: '3.5'
 services:
     ftp:
         build: ./ftp
@@ -48,4 +48,5 @@ services:
         networks:
             - symp
 networks:
-    symp:
+  symp:
+    name: sympdocker_symp

@@ -49,4 +49,3 @@ services:
             - symp
 networks:
   symp:
-    name: sympdocker_symp

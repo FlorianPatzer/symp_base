@@ -47,5 +47,8 @@ services:
         image: jlesage/filezilla
         networks:
             - symp
+            
 networks:
-  symp:
+    symp:
+        external:
+            name: symp

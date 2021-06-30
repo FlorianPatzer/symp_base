@@ -1,32 +1,33 @@
 version: '3.5'
 services:
-    ftp:
+    symp-ftp:
         build: ./ftp
         ports:
             - "20-21:20-21"
             - "21100-21110:21100-21110"
-        container_name: ftp
+        container_name: symp-ftp
         environment:
             PUBLICHOST: "localhost"
             FTP_USER: admin
             FTP_PASS: admin
-        restart: always
+        restart: unless-stopped
         networks:
             - symp
         
-    camunda:
+    symp-camunda:
         build: ./camunda
-        container_name: camunda
-        restart: always
+        container_name: symp-camunda
+        restart: unless-stopped
         ports:
             - '8080:8080'
         networks:
             - symp
             
-    mysql:
+    symp-mysql:
         image: mysql
         command: --default-authentication-plugin=mysql_native_password
-        container_name: mysql
+        container_name: symp-mysql
+        restart: unless-stopped
         environment:
             MYSQL_ROOT_PASSWORD: 0b53c4f
             MYSQL_DATABASE: security_analysis_repository
@@ -37,14 +38,15 @@ services:
         networks:
             - symp
   
-    filezilla:
-        container_name: filezilla
+    symp-filezilla:
+        container_name: symp-filezilla
         ports:
             - '5800:5800'
         volumes:
             - '/docker/appdata/filezilla:/config:rw'
             - '$HOME:/storage:rw'
         image: jlesage/filezilla
+        restart: unless-stopped
         networks:
             - symp
             

@@ -1,6 +1,6 @@
 #!/bin/bash
-echo "What's the address of your server?(Wrong address will cause connection issues when validating self signed CA)"
-read server_address
+server_address=symp-ftp
+echo "Using $server_address as default server address"
 
 echo "What's the organization unit of your server?"
 read server_ou

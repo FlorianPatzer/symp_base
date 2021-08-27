@@ -1,2 +1,7 @@
 camunda/webapps/reasoningbpm-1.0.0.war.bk
 ftp/examples
+ftp/ssl/ftp.p12
+ftp/ssl/keystore.jks
+ftp/ssl/vsftpd.crt
+ftp/ssl/vsftpd.key
+
